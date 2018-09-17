@@ -57,30 +57,33 @@
       <usages-collector id="statistics.lifecycle.project">
         <counts>
           <entry key="project.closed" value="1" />
+          <entry key="project.open.time.32" value="1" />
           <entry key="project.open.time.4" value="1" />
-          <entry key="project.opened" value="1" />
+          <entry key="project.opened" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="html" value="465" />
-          <entry key="js" value="626" />
+          <entry key="html" value="561" />
+          <entry key="js" value="634" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="HTML" value="465" />
-          <entry key="JavaScript" value="626" />
+          <entry key="HTML" value="561" />
+          <entry key="JavaScript" value="634" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="html" value="1" />
+          <entry key="html" value="2" />
+          <entry key="js" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="HTML" value="1" />
+          <entry key="HTML" value="2" />
+          <entry key="JavaScript" value="4" />
         </counts>
       </usages-collector>
     </session>
@@ -90,7 +93,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/home.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="263">
@@ -100,29 +103,70 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/SignIn.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="243">
+              <caret line="9" column="12" lean-forward="true" selection-start-line="9" selection-start-column="12" selection-end-line="9" selection-end-column="12" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/newhome.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="282">
-              <caret line="199" column="40" selection-start-line="199" selection-start-column="40" selection-end-line="199" selection-end-column="40" />
+            <state relative-caret-position="156">
+              <caret line="287" column="23" selection-start-line="287" selection-start-column="16" selection-end-line="287" selection-end-column="23" />
               <folding>
                 <element signature="n#li#0;n#ul#0;n#div#0;n#div#3;n#body#0;n#html#0;n#!!top" />
                 <element signature="n#li#1;n#ul#0;n#div#0;n#div#3;n#body#0;n#html#0;n#!!top" />
                 <element signature="n#li#2;n#ul#0;n#div#0;n#div#3;n#body#0;n#html#0;n#!!top" />
                 <element signature="n#div#0;n#div#0;n#div#0;n#div#0;n#div#4;n#body#0;n#html#0;n#!!top" />
                 <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#4;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#fieldset#0;n#form#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#4;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#2;n#div#0;n#div#0;n#div#0;n#div#4;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="e#9104#9835#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/js/angularOauth.js">
+        <entry file="file://$PROJECT_DIR$/js/plugins.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2916" />
+            <state relative-caret-position="162">
+              <caret line="6" column="74" lean-forward="true" selection-start-line="6" selection-start-column="74" selection-end-line="6" selection-end-column="74" />
+            </state>
           </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/main.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-965">
+              <caret line="4" selection-start-line="4" selection-end-line="4" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/js/index.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="270">
+              <caret line="49" column="16" lean-forward="true" selection-start-line="49" selection-start-column="16" selection-end-line="49" selection-end-column="16" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/speechReg.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-342">
+              <caret line="43" column="11" selection-start-line="43" selection-start-column="11" selection-end-line="43" selection-end-column="11" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/angularOauth.js">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
@@ -133,11 +177,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/home.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-465">
-              <caret line="58" column="23" lean-forward="true" selection-start-line="58" selection-start-column="16" selection-end-line="58" selection-end-column="23" />
-              <folding>
-                <element signature="e#8242#8973#0" />
-              </folding>
+            <state relative-caret-position="1566">
+              <caret line="58" column="23" selection-start-line="58" selection-start-column="16" selection-end-line="58" selection-end-column="23" />
             </state>
           </provider>
         </entry>
@@ -153,7 +194,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>angular</find>
       <find>recipe</find>
       <find>icon</find>
       <find>value</find>
@@ -169,6 +209,9 @@
       <find>foodList</find>
       <find>audiosrc</find>
       <find>audio</find>
+      <find>java</find>
+      <find>renderNote</find>
+      <find>angular</find>
     </findStrings>
   </component>
   <component name="IdeDocumentHistory">
@@ -178,8 +221,11 @@
         <option value="$PROJECT_DIR$/home2.html" />
         <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/home.html" />
-        <option value="$PROJECT_DIR$/newhome.html" />
         <option value="$PROJECT_DIR$/js/home.js" />
+        <option value="$PROJECT_DIR$/SignIn.html" />
+        <option value="$PROJECT_DIR$/speechReg.js" />
+        <option value="$PROJECT_DIR$/js/speechReg.js" />
+        <option value="$PROJECT_DIR$/newhome.html" />
       </list>
     </option>
   </component>
@@ -191,13 +237,14 @@
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="width" value="1440" />
-    <option name="height" value="847" />
+    <option name="height" value="848" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -219,7 +266,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -227,10 +273,13 @@
     <property name="HbShouldOpenHtmlAsHb" value="" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="js-jscs-nodeInterpreter" value="C:\Program Files\nodejs\node.exe" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Desktop/converting-from-speech-to-text-with-javascript" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\hoang\OneDrive\UMKC Files\UMKC\CS 5551\ICP 3\Tutorial\CS5551-Tutorial-III\js" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\hoang\OneDrive\UMKC Files\UMKC\CS 5551\ICP 3\Tutorial\CS5551-Tutorial-III" />
       <recent name="C:\Users\new\OneDrive\UMKC Files\UMKC\CS 5551\ICP 3\Tutorial\CS5551-Tutorial-III" />
@@ -307,16 +356,17 @@
       <workItem from="1536274326596" duration="22262000" />
       <workItem from="1536363297386" duration="2260000" />
       <workItem from="1537114403999" duration="18278000" />
+      <workItem from="1537146475902" duration="6179000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="46119000" />
+    <option name="totallyTimeSpent" value="52298000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15399867" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15333775" />
       <window_info id="Structure" order="1" side_tool="true" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -362,31 +412,10 @@
     <entry file="file://$PROJECT_DIR$/Capture.PNG">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-177">
-          <caret line="49" column="16" lean-forward="true" selection-start-line="49" selection-start-column="16" selection-end-line="49" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/js/services.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="285">
           <caret line="19" column="11" selection-start-line="19" selection-start-column="11" selection-end-line="19" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/plugins.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="6" column="74" lean-forward="true" selection-start-line="6" selection-start-column="74" selection-end-line="6" selection-end-column="74" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-621">
-          <caret line="4" selection-start-line="4" selection-end-line="4" />
         </state>
       </provider>
     </entry>
@@ -400,38 +429,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/home2.html" />
     <entry file="file://$PROJECT_DIR$/index.html" />
-    <entry file="file://$PROJECT_DIR$/newhome.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="282">
-          <caret line="199" column="40" selection-start-line="199" selection-start-column="40" selection-end-line="199" selection-end-column="40" />
-          <folding>
-            <element signature="n#li#0;n#ul#0;n#div#0;n#div#3;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#li#1;n#ul#0;n#div#0;n#div#3;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#li#2;n#ul#0;n#div#0;n#div#3;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#div#0;n#div#0;n#div#0;n#div#0;n#div#4;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#4;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#fieldset#0;n#form#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#4;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#2;n#div#0;n#div#0;n#div#0;n#div#4;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="e#9104#9835#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/js/angularOauth.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2916" />
-      </provider>
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/images/1.jpg">
       <provider selected="true" editor-type-id="images" />
     </entry>
     <entry file="file://$PROJECT_DIR$/home.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-465">
-          <caret line="58" column="23" lean-forward="true" selection-start-line="58" selection-start-column="16" selection-end-line="58" selection-end-column="23" />
-          <folding>
-            <element signature="e#8242#8973#0" />
-          </folding>
+        <state relative-caret-position="1566">
+          <caret line="58" column="23" selection-start-line="58" selection-start-column="16" selection-end-line="58" selection-end-column="23" />
         </state>
       </provider>
     </entry>
@@ -439,6 +446,56 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="263">
           <caret line="78" column="81" selection-start-line="78" selection-start-column="81" selection-end-line="78" selection-end-column="81" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SignIn.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="243">
+          <caret line="9" column="12" lean-forward="true" selection-start-line="9" selection-start-column="12" selection-end-line="9" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/speechReg.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-342">
+          <caret line="43" column="11" selection-start-line="43" selection-start-column="11" selection-end-line="43" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/newhome.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="156">
+          <caret line="287" column="23" selection-start-line="287" selection-start-column="16" selection-end-line="287" selection-end-column="23" />
+          <folding>
+            <element signature="n#li#0;n#ul#0;n#div#0;n#div#3;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#li#1;n#ul#0;n#div#0;n#div#3;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#li#2;n#ul#0;n#div#0;n#div#3;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#div#0;n#div#0;n#div#0;n#div#0;n#div#4;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#4;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#2;n#div#0;n#div#0;n#div#0;n#div#4;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/plugins.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="6" column="74" lean-forward="true" selection-start-line="6" selection-start-column="74" selection-end-line="6" selection-end-column="74" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-965">
+          <caret line="4" selection-start-line="4" selection-end-line="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="49" column="16" lean-forward="true" selection-start-line="49" selection-start-column="16" selection-end-line="49" selection-end-column="16" />
         </state>
       </provider>
     </entry>

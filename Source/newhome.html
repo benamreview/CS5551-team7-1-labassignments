@@ -146,6 +146,9 @@
                         <div class="col-md-8 col-sm-8" style="width: 100%;">
                             <div class="box-content profile">
                                 <h3 class="widget-title">Search Food Stats</h3>
+                                <button id="start-record-btn" title="Start Recording">Start Recognition</button>
+                                <button id="pause-record-btn" title="Pause Recording">Pause Recognition</button>
+                                <p id="recording-instructions">Press the <strong>Start Recognition</strong> button and allow access.</p>
                                 <input type="text" id="myInput" ng-model="myInput" width = "140%" placeholder="Search Something...">
                                 <script type="text/javascript">
                                     KGSearchWidget("AIzaSyB087vg5c4hTnohVi4sjP63cHv4Eh3jt2s", document.getElementById("myInput"), {
@@ -292,7 +295,7 @@
 <script type="text/javascript" src="js/services.js"></script>
 <script src="js/googleOauth.js"></script>
 <script src="js/angularOauth.js"></script>
-
+<script src="js/speechReg.js"></script>
 <!-- templatemo 439 rectangle -->
 
 </body>

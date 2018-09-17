@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-signin-client_id" content="40839794999-nnjfh8o3et2vbf2tvhc85hjbfvj7cm8f.apps.googleusercontent.com">
+    <title>Sign In Page</title>
+</head>
+<body>
+<div class="g-signin2"
+     data-onsuccess="onSignIn"
+     data-accesstype="offline"
+     data-theme="dark"
+     data-redirecturi="http://localhost:8080/OneDrive/UMKC%20Files/UMKC/CS%205551/ICP%203/Tutorial/CS5551-Tutorial-III/newhome.html"></div>
+<script type="text/javascript">
+    function onSignIn(googleUser) {
+        var profile = googleUser.getBasicProfile();
+        console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+        console.log('Name: ' + profile.getName());
+        console.log('Image URL: ' + profile.getImageUrl());
+        console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+    }
+</script>
+<a href="#" onclick="signOut();">Sign out</a>
+<script>
+    function signOut() {
+        window.location.replace("newhome.html");
+    }
+</script>
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+</body>
+</html>
