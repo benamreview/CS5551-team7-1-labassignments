@@ -2,7 +2,7 @@
 	Rectangle Template 
 	http://www.templatemo.com/preview/templatemo_439_rectangle
 */
-		
+
 
 @font-face {
   font-family: 'robotolight';
@@ -27,15 +27,15 @@
 }
 
 .green {
-	color: #9F3;
+  color: #9F3;
 }
 
 .orange {
-	color: #FC0;
+  color: #FC0;
 }
 
 .blue {
-	color: #06C;
+  color: #06C;
 }
 
 /*---------------------------------------------------------
@@ -226,7 +226,7 @@ h1, h2, h3, h4, h5 {
   height: 100%;
   width: 100%;
   z-index: 0;
-  background-image: url(../images/bg.jpg);
+  background-image: url(../images/background.jpg);
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -346,11 +346,22 @@ h1, h2, h3, h4, h5 {
   position: relative;
   z-index: 10;
   padding: 14px 0;
-  background: rgba(0, 0, 0, 0.7);
+  background: #007BFF;
 }
 
 .phone-info a {
-  color: #5cb48e;
+  color: #ff0000;
+  font-weight: bold;
+}
+@media screen and (max-width: 992px) {
+  .phone-info {
+    text-align: center;
+  }
+}
+
+.phone-info {
+  color: #ff0000;
+  font-weight: bold;
 }
 @media screen and (max-width: 992px) {
   .phone-info {
