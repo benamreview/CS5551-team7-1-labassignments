@@ -17,46 +17,6 @@ myapp.config( function (TokenProvider) {
     } );
 } );
 myapp.controller( 'homeController', function ($scope, $http,$rootScope,$log, $window, Token, Facebook,$http,$location) {
-    $scope.accessToken = Token.get();
-    //  https://api.edamam.com/diet?q=chicken&app_id=${YOUR_APP_ID}&app_key=${YOUR_APP_KEY}&from=0&to=3&calories=gte%20591,%20lte%20722&health=alcohol-free
-    $scope.foodList = new Array(); //an Array that contains the list of food
-    $scope.venueList = new Array();
-    $scope.mostRecentReview;
-    $scope.selectedTerm;
-    $scope.childmethod = function() {
-        //This method is used to invoke the method contained within
-        //the newController (a child of this parent controller).
-        //the event "CallmyNewControllerMethod" is defined within the newController
-        $rootScope.$emit("CallmyNewControllerMethod", {message: 'in my new Controller 2'});
-    };
-
-    $scope.lookupFood = function () {
-        //var end = document.getElementById('endlocation').value;
-        //alert( "hello " + $scope.food )
-        //var apiLink = 'https://api.nutritionix.com/v1_1/search/' + $scope.food + '?results=0:1&fields=*&appId=33ae3982&appKey=cc0cb03c44bf271c37f372cc64d0d27e';
-        //alert("hello " + apiLink);
-
-
-        //This is the API reference link for Nutritionix.
-        //It needs user input value, username, and key in order to return
-        //results in JSON format.
-        $http.get( 'https://api.nutritionix.com/v1_1/search/' + $scope.food + '?results=0:1&fields=*&appId=33ae3982&appKey=cc0cb03c44bf271c37f372cc64d0d27e')
-            .success( function (data1) {
-            //This is to make sure if the API returns more than one statistic for food,
-            //The website will be able to display all of them as items of an array.
-            for (var i = 0; i < data1.hits.length; i++) {
-                //alert( data1.hits[i].fields.item_name);
-                $scope.foodList[i]= {
-
-                    "name": data1.hits[i].fields.item_name,//Long name of item retrieved in API
-                    "serving": data1.hits[i].fields.nf_serving_weight_grams,//Serving Size in Grams
-                    "calories": data1.hits[i].fields.nf_calories //number of calories in the food type
-                };
-            }
-        } );
-        $scope.childmethod(); //This method will invoke the child method from the newController
-
-    };
     $scope.lookupInfo = function () {
 
         //alert(document.getElementById("selectedID").innerHTML);

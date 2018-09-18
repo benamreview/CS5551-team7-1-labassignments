@@ -147,9 +147,18 @@
                                     <fieldset>
                                         <!--lookupInfo() is the first main function of the page
                                         as it will jump to the home.js file and execute the its definition
-                                        which will call the API based on the input, process and filter the returned JSON
-                                        file and produce an array of variables
-                                        that contains meaningful information -->
+                                        which will call the Google Knowledge Graph API based on the input passed from the
+                                        function KGSearchWidget(), process and filter the returned JSON
+                                        file to extract important pieces of information such as name, description, detailedDescription,
+                                        and imageURL-->
+
+                                        <!-- The following code presents the concept of Local Storage in HTML5 where the browser can retain
+                                        some information from the previous page using localStorage.setItem and localStorage.getItem
+
+                                        Local Storage can also be used with indexing for storing and retrieving information as well.
+                                        E.g: localStorage[0] = "value"
+
+                                        In this mash up page, Local Storage will be used mainly for retaining email and name of the signed in user-->
                                         <p>Name : <span style = "display: inline" id = "userName" ></span></p>
                                         <p>Email : <span style = "display: inline" id = "userEmail"></span></p>
                                         <script>
@@ -162,18 +171,50 @@
                                                 document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
                                             }
                                         </script>
+
+
+                                        <!--This is the second API that is implemented in the Mashup page. This is the built-in Speech-to-Text API
+                                         that is only available with Google Chrome version 26 or later. If you are using Edge or Mozilla Firefox, there
+                                         is a high probability that this API will not be able to work
+
+                                         IDEA: Instead of using Google Cloud Speech-To-Text API that is only available for Server Side processing, this built-in client
+                                         Javascript API is useful for short speech-to-text conversion, especially only a couple of seconds, ideal for search engine.
+
+                                         DESIGN: There are 2 buttons in the layout, one for starting the recognition, and the other for pausing the recognition.
+                                         Once given the permission to access the microphone, the web page will listen to the user for as long as the user says
+                                         and as long as the user does not keep silent for more than 10-15 seconds, the application will keep listening.
+
+                                         SETTING UP PERMISSION: Because of security issues from running local html files, developers using this API are highly recommended
+                                         to run the html containing this API within a server, either local or deployed in order to gain access to the hardware components such as
+                                         the microphone. As a personal experience, I have tried running this as a local .html file by opening the newhome.html in the browser but failed continuously
+                                         even after clicking "Allow Microphones for this site" because the browser by default would not grant the microphones
+                                         to offline/local files runnning without a server. Therefore, after I set a server up using Servez (which stands for Server Easy).
+                                         I have successfully run this API after being granted permission to the microphone. The URL should look similar to this:
+
+                                                            http://localhost:8080/Documents/GitHub/CS5551-team7-1-labassignments/Source/newhome.html
+
+                                         Disclaimer: This is still an under-development technology therefore not guaranteed to have 100% accuracy on the translation/conversion. If the webpage does not
+                                         work on your browser, consider using Google Chrome latest version, or refer to my video for a successful output-->
                                         <button id="start-record-btn" title="Start Recording">Start Recognition</button>
                                         <button id="pause-record-btn" title="Pause Recording">Pause Recognition</button>
                                         <p id="recording-instructions">Press the <strong>Start Recognition</strong> button and allow access.</p>
+                                        <!-- the Text input myInput is used to contain the text from the Speech-To-Text API and also acts as the search =
+                                        bar for the drop down menu from KGSearchWidget-->
                                         <input type="text" id="myInput" ng-model="myInput" style ="width: 100%" placeholder="Search Something...">
                                         <input type="button" id= "hiddenB" class="button" style="display:none"
                                                ng-click="lookupInfo()" value="hidden" >
                                         <script type="text/javascript">
                                             KGSearchWidget("AIzaSyB087vg5c4hTnohVi4sjP63cHv4Eh3jt2s", document.getElementById("myInput"), {
+                                                /*This function is invoked whenever an item in the dropdown list is selected.
+                                                In this case, I programmed it in a way that whenever something is click,
+                                                    save it in the selectedID html variable (which will be used in the lookupInfo() later on
+                                                    execute the lookupInfo() function using a hidden button
+                                                **This may not be best practice for invoking another javascript function within a javascript function
+                                                * But it does the job for now. Feedback will be greatly appreciated.
+                                                */
                                                 "selectHandler": function(e) {
                                                     document.getElementById("selectedID").innerHTML = e.row.id;
                                                     document.getElementById("hiddenB").click();
-                                                    //alert("selected " + document.getElementById("selectedID").innerHTML);
                                                 }
                                             });
                                         </script>
@@ -185,25 +226,12 @@
                     <div class="row">
                         <div class="col-md-8 col-sm-8">
                             <div class="box-content">
-                                <h3 class="widget-title" style="font-weight: 600; ">Food Statistics Report</h3>
-                                <!--This report is a modified version of the "How To Make" report of the tutorial
-                                In it, name, amount of calories and serving size will be displayed
-                                I removed the second report (Where to eat) because it is no longer needed
-                                The other API does not return text and does not need to be displayed.-->
-                                <div class="project-item" >
-                                    <li ng-repeat="r in foodList">
-                                        <h4 class="widget-title">{{r.name}}</h4>
-                                        <div class="partition-wrap">
-                                            <div class="partition1">
-                                                Calories: <a href="{{r.calories}}"> {{r.calories}}</a>
-                                            </div>
-                                            <div class="partition2">
-                                                Serving size in Grams: <a href="{{r.serving}}"> {{r.serving}}</a>
-                                            </div>
-                                        </div>
-                                    </li>
+                                <h3 class="widget-title" style="font-weight: 600; ">Search Results</h3>
+                                <!--This report is used to display result from an item that the user clicks on. For example, if user clicks on the first item.
+                                The item's information and image (if any) will be sent to this box-content.
+                                image's source is left blank so that it can be inserted later.-->
                                     <div class = "stage" style = "background-color:beige;">
-                                        No Info Yet!
+                                        No information selected
                                     </div>
                                     <p align="center">
                                         <img id="img" src ="">
@@ -213,20 +241,6 @@
                                 </div>
                             </div>
                         </div>
-                        <!--<div class="col-md-7 col-sm-7">
-                            <div class="box-content">
-                                <h3 class="widget-title" style="font-weight: 600">Where To Get</h3>
-                                <div style="margin-bottom: 20px;">
-                                    <li ng-repeat="venue in venueList" style="margin-bottom: 10px;">
-                                        <a  href="" ng-click="getReviews(venue)">{{venue.name}}</a>
-                                    </li>
-                                </div>
-                                <div id="div_ReviewList" style="display:none;"  >
-
-
-                                </div>
-                            </div>
-                        </div> -->
                     </div>
                 </div>
                 <div id="menu-4" class="content contact-section">
@@ -269,7 +283,7 @@
                         <a class="show-1 active homebutton" href="#"><i class="fa fa-home"></i>Home</a>
                     </li>
                     <li>
-                        <a class="show-2 aboutbutton" href="#"><i class="fa fa-search"></i>Look up Food Stats</a>
+                        <a class="show-2 aboutbutton" href="#"><i class="fa fa-search"></i>SwiftSearch Engine</a>
                     </li>
                     <li>
                         <a class="show-5 contactbutton" href="#"><i class="fa fa-envelope"></i>Contact</a>
