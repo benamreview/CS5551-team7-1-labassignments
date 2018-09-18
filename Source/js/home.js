@@ -18,10 +18,22 @@ myapp.config( function (TokenProvider) {
 } );
 myapp.controller( 'homeController', function ($scope, $http,$rootScope,$log, $window, Token, Facebook,$http,$location) {
     $scope.lookupInfo = function () {
+        /*Besides using the search widget, the Knowledge Graph API can also be used to query for a specific item
+        or a list of items and retrieve more detailed information about that item. In this function, the item ID is passed
+        down by the selectHandler() function of the KGSearchWidget in form of a value of a html element named selected ID.
+        This selected ID stands for the ID of the item that the user clicked on when he/she is being prompted with a list
+        of search results.
 
-        //alert(document.getElementById("selectedID").innerHTML);
-        var imgurl="Hi!";
-        var service_url = 'https://kgsearch.googleapis.com/v1/entities:search';
+        To activate this API, an API key is needed. For my account it is: AIzaSyB087vg5c4hTnohVi4sjP63cHv4Eh3jt2s
+
+        After accessing the API successfully with itemID and proper API key, the user will retrieve a JSON file with all the necessary
+        information about that particular item, including name, image, url, description, website, detailedDescription.
+
+        For displaying, I only used 4 attributes: name, description, detailedDescription, and imgUrl in the report.
+        */
+
+
+        var service_url = 'https://kgsearch.googleapis.com/v1/entities:search'; //main URI
         var params = {
             'ids': document.getElementById("selectedID").innerHTML,
             'indent': true,
@@ -29,93 +41,19 @@ myapp.controller( 'homeController', function ($scope, $http,$rootScope,$log, $wi
         };
         $.getJSON(service_url + '?callback=?', params, function (response) {
             $.each(response.itemListElement, function (i, element) {
-                $('.stage').css('background-color', 'lightpink')
-                $('.stage').html('');
+                /*Stage is the html left blank in the beginning of session
+                It will be replaced as soon as the user clicks on an item or a new item
+                */
+                $('.stage').css('background-color', 'lightpink');
+                $.html('');
                 $('<div>', {text: element['result']['name']}).appendTo('.stage');
                 $('<div>', {text: element['result']['description']}).appendTo('.stage');
                 $('<div>', {text: element['result']['detailedDescription']['articleBody']}).appendTo('.stage');
-                imgurl = element['result']['image']['contentUrl'];
-                //alert (element['result']['image']['contentUrl']);
-                //alert(element['result']['detailedDescription']['articleBody']);
-                $('#img').attr('src',imgurl);
-                //alert ("Before" + imgurl);
-                //alert ("After " + $scope.imgURL)
+                $('#img').attr('src',imgurl); //this will add/modify the image source that will be displayed within the page.
             });
         });
-        //$scope.imgURL ="Hi!";
-        //alert ("After " + $scope.imgURL);
     };
 
-        $rootScope.updateSession = function () {
-            //reads the session variables if exist from php
-            $rootScope.session = "hello";
-
-        };
-
-    ;
-
-    $rootScope.updateSession();
-
-
-    // button functions
-    $scope.getLoginStatus = function () {
-        Facebook.getLoginStatus();
-
-    };
-
-    $scope.login = function () {
-        Facebook.login();
-    };
-
-    $scope.logout = function () {
-        Facebook.logout();
-        console.log("inside");
-        $rootScope.facebook_id = "";
-    };
-
-    $scope.unsubscribe = function () {
-        Facebook.unsubscribe();
-    };
-
-    $scope.getInfo = function () {
-        FB.api( '/' + $rootScope.facebook_id, function (response) {
-            console.log( 'Good to see you, ' + response.name + '.' + $rootScope.facebook_id );
-
-        } );
-        $rootScope.info = $rootScope.session;
-
-    };
-
-
-} )
-//In order to maintain Separation of Concern, it is recommended to have separate controllers to
-//Do their own thing such as music, video, audio, and other categories to
-//Avoid cramming all the features of the application into one big chunk of code.
-//Therefore, a new controller is necessary for a second API.
-//This new controller will be used for Watson's Text-to-Speech API processing based
-//on User's search term.
-myapp.controller('newController', function($scope,$rootScope) {
-    //This method is basically a wrapping method for the one below
-    //This will be the main reference point for the parent Controller
-    $rootScope.$on("CallmyNewControllerMethod", function(event,param1){
-        $scope.myNewControllerMethod(param1);
-    });
-
-    //The actual execution/operation happens here as the audio source is actually
-    //defined and loaded into the audio ID that is contained within the <div></div>
-    //of the new Controller in the HTML file
-    $scope.myNewControllerMethod = function(param1) {
-        //alert(param1.message);
-
-        var audio = document.getElementById("audio");
-        $scope.audiosrc = "https://stream.watsonplatform.net/text-to-speech/api/v1/synthesize?username=a78ae0df-f032-4345-9478-713e3c1b50cb&password=o2AixHuTJjWW&text=" + $scope.food;
-        //alert($scope.audiosrc);
-        //Every time an audio source is changed, load() method is needed to reload this
-        //new source to the element.
-        audio.load();
-        //Play the audio as soon as it is (re)loaded.
-        audio.play();
-    }
-});
+} );
 
 
