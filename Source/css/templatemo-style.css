@@ -137,7 +137,7 @@ button,
 input,
 select,
 textarea {
-  font-size: 100%;
+  font-size: 130%;
   margin: 0;
   vertical-align: baseline;
   *vertical-align: middle;
@@ -623,7 +623,7 @@ h1, h2, h3, h4, h5 {
 }
 .contact-form input.button {
   width: auto;
-  color: white;
+  color: azure;
   background: #5cb48e;
   text-transform: uppercase;
   border: 0;

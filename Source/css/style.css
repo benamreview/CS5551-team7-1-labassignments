@@ -70,9 +70,9 @@ body{
 }
 .contact_form li{
 	position:relative;
-} 
+}
 	/* form element visual styles */
-	.contact_form li{ 
+	.contact_form li{
 		float: left;
 		outline: none;
 		border: 1px solid #DDDDDD;
@@ -93,7 +93,7 @@ body{
 		-ms-transition: all 0.5s ease-out;
 		-o-transition: all 0.5s ease-out;
 	}
-	.contact_form li:hover{ 
+	.contact_form li:hover{
 		border: 1px solid #79B42B;
 		color:#79B42B;
 	}
@@ -133,10 +133,10 @@ body{
 		-webkit-border-radius: 2px;
 		-moz-border-radius: 2px;
 		-o-border-radius: 2px;
-	}	
+	}
 .contact_form input[type="submit"]:hover {
 	background:#88C470;
-}	
+}
 .contact_form input[type="checkbox"] {
 	width: 21px;
 	vertical-align: middle;
@@ -494,7 +494,7 @@ body{
 		padding: 10px;
 		margin: 22px 0 30px;
 	}
-	
+
 	.forgot a {
 		font-size: 1em;
 	}

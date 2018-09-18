@@ -4,7 +4,8 @@
     <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/knowledge/kgsearch/widget/1.0/widget.min.css">
     <style>
         .kge-search-picker {
-            width: 130px;
+            width: 700px;
+            z-index: 5;
         }
     </style>
     <script type="text/javascript" src="https://www.gstatic.com/knowledge/kgsearch/widget/1.0/widget.min.js"></script>
@@ -146,18 +147,7 @@
                         <div class="col-md-8 col-sm-8" style="width: 100%;">
                             <div class="box-content profile">
                                 <h3 class="widget-title">Search Food Stats</h3>
-                                <button id="start-record-btn" title="Start Recording">Start Recognition</button>
-                                <button id="pause-record-btn" title="Pause Recording">Pause Recognition</button>
-                                <p id="recording-instructions">Press the <strong>Start Recognition</strong> button and allow access.</p>
-                                <input type="text" id="myInput" ng-model="myInput" width = "140%" placeholder="Search Something...">
-                                <script type="text/javascript">
-                                    KGSearchWidget("AIzaSyB087vg5c4hTnohVi4sjP63cHv4Eh3jt2s", document.getElementById("myInput"), {
-                                        "selectHandler": function(e) {
-                                            document.getElementById("selectedID").innerHTML = e.row.id;
-                                            //alert("selected " + document.getElementById("selectedID").innerHTML);
-                                        }
-                                    });
-                                </script>
+
                                 <form class="contact-form">
                                     <fieldset>
                                         <!--lookupFood() is the main logic of the page
@@ -165,11 +155,33 @@
                                         which will call the API based on the input, process and filter the returned JSON
                                         file and produce an array of variables
                                         that contains meaningful information -->
-
-                                        <input type="text" style="width: 44%;" class="name" id="food"
-                                               ng-model="food" placeholder="Enter Your Type of Food...">
-                                        <input type="button" class="button" style="padding:9px 18px;"
-                                               ng-click="lookupInfo()" value="Look it Up!">
+                                        <p>Name : <span style = "display: inline" id = "userName" ></span></p>
+                                        <p>Email : <span style = "display: inline" id = "userEmail"></span></p>
+                                        <script>
+                                            // Check browser support
+                                            if (typeof(Storage) !== "undefined") {
+                                                // Retrieve
+                                                document.getElementById("userName").innerHTML = localStorage.getItem("Name");
+                                                document.getElementById("userEmail").innerHTML = localStorage.getItem("Email");
+                                            } else {
+                                                document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
+                                            }
+                                        </script>
+                                        <button id="start-record-btn" title="Start Recording">Start Recognition</button>
+                                        <button id="pause-record-btn" title="Pause Recording">Pause Recognition</button>
+                                        <p id="recording-instructions">Press the <strong>Start Recognition</strong> button and allow access.</p>
+                                        <input type="text" id="myInput" ng-model="myInput" style ="width: 100%" placeholder="Search Something...">
+                                        <input type="button" id= "hiddenB" class="button" style="display:none"
+                                               ng-click="lookupInfo()" value="hidden" >
+                                        <script type="text/javascript">
+                                            KGSearchWidget("AIzaSyB087vg5c4hTnohVi4sjP63cHv4Eh3jt2s", document.getElementById("myInput"), {
+                                                "selectHandler": function(e) {
+                                                    document.getElementById("selectedID").innerHTML = e.row.id;
+                                                    document.getElementById("hiddenB").click();
+                                                    //alert("selected " + document.getElementById("selectedID").innerHTML);
+                                                }
+                                            });
+                                        </script>
                                     </fieldset>
                                 </form>
                             </div>
