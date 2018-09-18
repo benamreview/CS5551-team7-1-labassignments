@@ -32,7 +32,7 @@ myapp.controller( 'homeController', function ($scope, $http,$rootScope,$log, $wi
         For displaying, I only used 4 attributes: name, description, detailedDescription, and imgUrl in the report.
         */
 
-
+        var imgurl="";
         var service_url = 'https://kgsearch.googleapis.com/v1/entities:search'; //main URI
         var params = {
             'ids': document.getElementById("selectedID").innerHTML,
@@ -44,8 +44,9 @@ myapp.controller( 'homeController', function ($scope, $http,$rootScope,$log, $wi
                 /*stage is the html left blank in the beginning of session
                 It will be replaced as soon as the user clicks on an item or a new item
                 */
+                imgurl = element['result']['image']['contentUrl'];
                 $('.stage').css('background-color', 'lightpink');
-                $.html('');
+                $('.stage').html('');
                 $('<div>', {text: element['result']['name']}).appendTo('.stage');
                 $('<div>', {text: element['result']['description']}).appendTo('.stage');
                 $('<div>', {text: element['result']['detailedDescription']['articleBody']}).appendTo('.stage');

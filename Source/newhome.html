@@ -74,13 +74,6 @@
  task: the Text-to-Speech API. This is meant for good practice only, especially in case
  of an app that relies on multiple API calls and features. Separation of Concern.-->
 <body ng-controller="homeController">
-<div ng-controller="newController">
-    <audio id = "audio"> <!--This is an audio element, whose source will be processed
-    by the home.js and newController-->
-        <source ng-src={{audiosrc}}>
-        Your browser does not support the audio element.
-    </audio>
-</div>
 <!--[if lt IE 7]>
 <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
     your browser</a> to improve your experience.</p>
