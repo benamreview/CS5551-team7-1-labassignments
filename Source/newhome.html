@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html ng-app="homeModule">
 <head>
+    <!--This is the linked css stylesheet for Google Smart Search Widget. This link will provide how images and text will
+     appear under the drop down menu
+     User can define how wide the menu can be
+     the z-index helps bring the search menu to the front instead of being overlapped by other textboxes-->
     <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/knowledge/kgsearch/widget/1.0/widget.min.css">
     <style>
         .kge-search-picker {
@@ -76,16 +80,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6 col-sm-6 col-xs-12">
-                <p class="phone-info">Call us: <a href="#">010 020 0340</a></p>
-            </div>
-            <div class="col-md-6 col-sm-6 col-xs-12">
-                <div class="social-icons">
-                    <ul>
-                        <li><a href="#" class="fa fa-facebook"></a></li>
-                        <li><a href="#" class="fa fa-twitter"></a></li>
-                        <li><a href="#" ng-click="logout()" class="fa fa-sign-out"></a></li>
-                    </ul>
-                </div>
+                <p class="phone-info">Email us:<a href="#">dhh3hb@mail.umkc.edu</a></p>
             </div>
         </div>
     </div>
@@ -94,7 +89,7 @@
 
 <div class="visible-xs visible-sm responsive-menu">
     <a href="#" class="toggle-menu">
-        <i class="fa fa-bars"></i> Show Menu
+        <i class="fa fa-bars"></i> Open Menu
     </a>
     <div class="show-menu">
         <ul class="main-menu">
@@ -102,10 +97,10 @@
                 <a class="show-1 active homebutton" href="#"><i class="fa fa-home"></i>Home</a>
             </li>
             <li>
-                <a class="show-2 aboutbutton" href="#"><i class="fa fa-search"></i>Look Up Food Stats</a>
+                <a class="show-3 aboutbutton" href="#"><i class="fa fa-search"></i>Open SwiftSearch Engine</a>
             </li>
             <li>
-                <a class="show-5 contactbutton" href="#"><i class="fa fa-envelope"></i>Contact</a>
+                <a class="show-4 contactbutton" href="#"><i class="fa fa-envelope"></i>Contact</a>
             </li>
         </ul>
     </div>
@@ -146,11 +141,11 @@
                     <div class="row">
                         <div class="col-md-8 col-sm-8" style="width: 100%;">
                             <div class="box-content profile">
-                                <h3 class="widget-title">Search Food Stats</h3>
+                                <h3 class="widget-title">Search with SwiftSearch!</h3>
 
                                 <form class="contact-form">
                                     <fieldset>
-                                        <!--lookupFood() is the main logic of the page
+                                        <!--lookupInfo() is the first main function of the page
                                         as it will jump to the home.js file and execute the its definition
                                         which will call the API based on the input, process and filter the returned JSON
                                         file and produce an array of variables

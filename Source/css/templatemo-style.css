@@ -398,11 +398,11 @@ h1, h2, h3, h4, h5 {
 }
 
 .homebutton {
-  background: #207d59;
+  background: white;
 }
 
 .aboutbutton {
-  background: #3b5b8e;
+  background: darkred;
 }
 
 .projectbutton {
@@ -410,7 +410,7 @@ h1, h2, h3, h4, h5 {
 }
 
 .contactbutton {
-  background: #b85b53;
+  background: green;
 }
 
 .logo-top-margin {
