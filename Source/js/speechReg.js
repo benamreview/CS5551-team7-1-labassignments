@@ -1,3 +1,12 @@
+/*
+This template was extracted as one of the demo guides on GitHub. This API is built in the Chrome Browser version 26 or later.
+
+The API is contained within the window.SpeechRecognition (which used to be webkitSpeechRecognition)
+Therefore it is important to note both names and assign it to Speech Recognition to widen the selection and variety
+
+If the browser does not support this API, the catch function will execute with an error that says no-browser support.
+The no-browser support is already placed within the html file, but hidden until error occurs.
+*/
 try {
   var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
   var recognition = new SpeechRecognition();
@@ -7,60 +16,57 @@ catch(e) {
   $('.no-browser-support').show();
   $('.app').hide();
 }
-
+/* *
+noteTextarea is used to reference the myInput element in the newhome.html
+noteContent is used to capture the transcript from the Voice Recognition tool
+instructions is used to display status and message to users regarding whether
+recording function has started or paused.
+ */
 
 var noteTextarea = $('#myInput');
 var instructions = $('#recording-instructions');
 var noteContent = '';
 
 
-/*---------speechReg.js--------------------
-      Voice Recognition 
-------------------------------*/
-
-// If false, the recording will stop after a few seconds of silence.
-// When true, the silence period is longer (about 15 seconds),
-// allowing us to keep recording even when the user pauses. 
+/*continuous variable helps prolong the interval of listening. If set to true, user will have up to 15 seconds of staying silend
+ * before it stops */
 recognition.continuous = true;
 
-// This block is called every time the Speech APi captures a line. 
+// This function is called whenever the Web Speech API captures a line.
 recognition.onresult = function(event) {
 
   // event is a SpeechRecognitionEvent object.
   // It holds all the lines we have captured so far. 
   // We only need the current one.
+  /* According to MDSN, resultIndex returns the smallest SpeechRecognitionObject
+  in the event that has been changed  */
+
   var current = event.resultIndex;
 
   // Get a transcript of what was said.
-  var transcript = event.results[current][0].transcript;
+  var transcript = event.results[current][0].transcript; //Get the transcript from the result index object
 
-  // Add the current transcript to the contents of our Note.
-  // There is a weird bug on mobile, where everything is repeated twice.
-  // There is no official solution so far so we have to handle an edge case.
+  // Append the transcript to the note and display the value of the note in the noteTextarea
     noteContent += transcript;
     noteTextarea.val(noteContent);
 };
 
 recognition.onstart = function() { 
-  instructions.text('Voice recognition activated. Try speaking into the microphone.');
+  instructions.text('Voice Recognition Feature of the Engine has been activated. Please speak.');
 }
 
 recognition.onspeechend = function() {
-  instructions.text('You were quiet for a while so voice recognition turned itself off.');
+  instructions.text('Voice Recognition Feature has been de-activated due to user inactivity.');
 }
 
 recognition.onerror = function(event) {
   if(event.error == 'no-speech') {
-    instructions.text('No speech was detected. Try again.');  
+    instructions.text('Did you say something? Please try again.');
   };
 }
 
-
-
-/*-----------------------------
-      App buttons and input 
-------------------------------*/
-
+/*After defining what each function does (the HOW), let's determine the WHEN. The functions will execute
+ as soon as start-record or pause-recognition is clicked. */
 $('#start-record-btn').on('click', function(e) {
   if (noteContent.length) {
     noteContent += ' ';
@@ -74,7 +80,8 @@ $('#pause-record-btn').on('click', function(e) {
   instructions.text('Voice recognition paused.');
 });
 
-// Sync the text inside the text area with the noteContent variable.
+//Regardless of the time, noteTextarea should be in sync with the noteContent in order to provide
+//consistent output.
 noteTextarea.on('input', function() {
   noteContent = $(this).val();
 })

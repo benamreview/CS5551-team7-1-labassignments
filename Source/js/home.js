@@ -41,7 +41,7 @@ myapp.controller( 'homeController', function ($scope, $http,$rootScope,$log, $wi
         };
         $.getJSON(service_url + '?callback=?', params, function (response) {
             $.each(response.itemListElement, function (i, element) {
-                /*Stage is the html left blank in the beginning of session
+                /*stage is the html left blank in the beginning of session
                 It will be replaced as soon as the user clicks on an item or a new item
                 */
                 $('.stage').css('background-color', 'lightpink');
