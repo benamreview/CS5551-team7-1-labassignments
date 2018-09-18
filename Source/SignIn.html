@@ -1,3 +1,6 @@
+<!--In order for Google Authorization to work, the user needs to specify what pages are authorized to sign in
+ and also what pages are authorized to redirect to. These authorizations can be set at console.developer.google.com
+ Google Sign-in will need a key in order to work. Please note that this key is different from the regular API key.-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,18 +9,20 @@
     <title>Sign In Page</title>
 </head>
 <body>
+<!--This class will determine what page to redirect to and what function to carry out
+
+ NOTE: Because this is a local server, you may need to specify what url to redirect to if Google returns invalid address
+ Change in the data-redirecturi variable-->
 <div class="g-signin2"
      data-onsuccess="onSignIn"
      data-accesstype="offline"
      data-theme="dark"
-     data-redirecturi="http://localhost:8080/OneDrive/UMKC%20Files/UMKC/CS%205551/ICP%203/Tutorial/CS5551-Tutorial-III/newhome.html"></div>
+     data-redirecturi="http://localhost:8080/Documents/GitHub/CS5551-team7-1-labassignments/Source/newhome.html"></div>
 <script type="text/javascript">
+    /*This is the main function of the google sign-in function as it determines what
+     * variables to be stored to localStorage and display later */
     function onSignIn(googleUser) {
         var profile = googleUser.getBasicProfile();
-        //alert('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-        //alert('Name: ' + profile.getName());
-        //alert('Image URL: ' + profile.getImageUrl());
-        //alert('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
         localStorage["Name"] = profile.getName();
         localStorage["Email"] = profile.getEmail();
     }
