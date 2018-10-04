@@ -1,0 +1,16 @@
+{
+    "projectName": "Lab2",
+    "projectPath": "C:\\Users\\hoang\\Documents\\GitHub\\CS5551-team7-1-labassignments\\Source\\Lab 2",
+    "defaultEditor": "sublime",
+    "frontendHandler": {
+        "android": "C:\\Users\\hoang\\AppData\\Roaming\\npm\\node_modules\\@aws-amplify\\cli\\node_modules\\amplify-frontend-android"
+    },
+    "amplify-frontend-android": {
+        "config": {
+            "ResDir": "app/src/main/res"
+        }
+    },
+    "providers": {
+        "awscloudformation": "C:\\Users\\hoang\\AppData\\Roaming\\npm\\node_modules\\@aws-amplify\\cli\\node_modules\\amplify-provider-awscloudformation"
+    }
+}
