@@ -1,5 +1,4 @@
 package com.fixitup.cs5551.lab2;
-//https://github.com/GoogleCloudPlatform/cloud-vision/blob/master/android/README.md
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -42,14 +41,27 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+/*Original Source Code (including mainactivity and all of the utility functions).
+//can be found here:
+//https://github.com/GoogleCloudPlatform/cloud-vision/blob/master/android/README.md
+//The project has been further incorporated with my own code for authentication to form the LAB 2 - GOOGLE VISION.
 
+//Disclaimer: The complexity of the original source code can be quite large as it involves a lot of internal and utility functions
+    that a wrapper or any other primary function will need to bind all of the components together. This explains
+    why I did not make a lot of changes to the original code because one small factor such as permission, annotaterequest, packagemanager,
+    and other built_in functions and variables.
 
+    However, a major factor that is needed in order for this project to work is the Google Cloud Vision API Key which
+    can be obtained through Google Developer Console.
+    This key was not included in the original Github repository.
+*/
 public class HomeActivity extends AppCompatActivity {
+    //CLOUD_VISION_API_KEY IS NEEDED. Enable Cloud Vision API in Google Developer Console.
     private static final String CLOUD_VISION_API_KEY = "AIzaSyB087vg5c4hTnohVi4sjP63cHv4Eh3jt2s" ;
     public static final String FILE_NAME = "temp.jpg";
     private static final String ANDROID_CERT_HEADER = "X-Android-Cert";
     private static final String ANDROID_PACKAGE_HEADER = "X-Android-Package";
-    private static final int MAX_LABEL_RESULTS = 10;
+    private static final int MAX_LABEL_RESULTS = 15;
     private static final int MAX_DIMENSION = 1200;
 
     private static final String TAG = HomeActivity.class.getSimpleName();
@@ -209,10 +221,22 @@ public class HomeActivity extends AppCompatActivity {
             base64EncodedImage.encodeContent(imageBytes);
             annotateImageRequest.setImage(base64EncodedImage);
 
-            // add the features we want
+            /*This is where we can add the features that we want the Google Vision Network to focus on,
+            * This is the full description of all features the Google API supports:
+            * -------------------------------------------------------------------
+            * LABEL_DETECTION	Execute Image Content Analysis on the entire image and return
+              TEXT_DETECTION	Perform Optical Character Recognition (OCR) on text within the image (character limit applies)
+              DOCUMENT_TEXT_DETECTION	Perform Optical Character Recognition (OCR) on dense text image
+                                        (premium feature not subject to character limit)
+              FACE_DETECTION	Detect faces within the image
+              LANDMARK_DETECTION	Detect geographic landmarks within the image
+              LOGO_DETECTION	Detect company logos within the image
+              SAFE_SEARCH_DETECTION	Determine image safe search properties on the image
+              IMAGE_PROPERTIES	Compute a set of properties about the image (such as the image's dominant colors) */
             annotateImageRequest.setFeatures(new ArrayList<Feature>() {{
                 Feature labelDetection = new Feature();
                 labelDetection.setType("LABEL_DETECTION");
+                //Number of results returned from the API can be adjusted.
                 labelDetection.setMaxResults(MAX_LABEL_RESULTS);
                 add(labelDetection);
             }});
@@ -230,18 +254,23 @@ public class HomeActivity extends AppCompatActivity {
         return annotateRequest;
     }
 
-    private static class LableDetectionTask extends AsyncTask<Object, Void, String> {
+    private static class LabelDetectionTask extends AsyncTask<Object, Void, String> {
         private final WeakReference<HomeActivity> mActivityWeakReference;
         private Vision.Images.Annotate mRequest;
 
-        LableDetectionTask(HomeActivity activity, Vision.Images.Annotate annotate) {
+        LabelDetectionTask(HomeActivity activity, Vision.Images.Annotate annotate) {
             mActivityWeakReference = new WeakReference<>(activity);
             mRequest = annotate;
         }
-
+        /*This happens whenever there is an error while connecting to the API such as
+        * billing methods, network connection, and other security issues.*/
         @Override
         protected String doInBackground(Object... params) {
             try {
+                /*mRequest is the result of the prepareAnnotateRequest function above.
+                the function returns an annotate request object for image analysis and this function will
+                execute the request. If successful, if will
+                */
                 Log.d(TAG, "created Cloud Vision request object, sending request");
                 BatchAnnotateImagesResponse response = mRequest.execute();
                 return convertResponseToString(response);
@@ -270,10 +299,10 @@ public class HomeActivity extends AppCompatActivity {
 
         // Do the real work in an async task, because we need to use the network anyway
         try {
-            AsyncTask<Object, Void, String> labelDetectionTask = new LableDetectionTask(this, prepareAnnotationRequest(bitmap));
+            AsyncTask<Object, Void, String> labelDetectionTask = new LabelDetectionTask(this, prepareAnnotationRequest(bitmap));
             labelDetectionTask.execute();
         } catch (IOException e) {
-            Log.d(TAG, "failed to make API request because of other IOException " +
+            Log.d(TAG, "Failed to make API request because of other IOException " +
                     e.getMessage());
         }
     }
@@ -297,9 +326,13 @@ public class HomeActivity extends AppCompatActivity {
         }
         return Bitmap.createScaledBitmap(bitmap, resizedWidth, resizedHeight, false);
     }
-
+    /*This is the string converter for the response. Because the API returns results in JSON
+     * format, it needs to be processed, filtered, and displayed in a readable format for users.
+      *NOTE: label.getScore() is a function that returns the confidence level of a prediction based on a trained dataset/model.
+      *      Higher score means higher confidence. 99.9 means 99.9% confidence level.
+      *      label.getDescription() returns the object, which the network thinks, exists in the picture.*/
     private static String convertResponseToString(BatchAnnotateImagesResponse response) {
-        StringBuilder message = new StringBuilder("I found these things:\n\n");
+        StringBuilder message = new StringBuilder("These are Google Vision's intepretations of the objects in your uploaded image:\n\n");
 
         List<EntityAnnotation> labels = response.getResponses().get(0).getLabelAnnotations();
         if (labels != null) {
@@ -308,7 +341,7 @@ public class HomeActivity extends AppCompatActivity {
                 message.append("\n");
             }
         } else {
-            message.append("nothing");
+            message.append("Nothing is in the uploaded photo! Please try again.");
         }
 
         return message.toString();
