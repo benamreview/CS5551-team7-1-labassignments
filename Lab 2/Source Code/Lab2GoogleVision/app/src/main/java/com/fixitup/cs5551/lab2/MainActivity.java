@@ -16,7 +16,17 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+/*For login activity, we take advantage of the cloud database and services from Firebase because it has been
+straightforward to implement authentication and database verification within Firebase.
 
+ For authentication, we enabled email/password authentication only, which will be validated against
+ the Firebase authentication feature, and also added to the database under User column if applicable.
+
+ Upon signing in successfully, we will direct the user to a new activity named HomeActivity
+ where the main logic of the application exists: Taking Pictures from Camera/Photo Gallery
+  and analyze it with Google Vision API for Android.
+
+ */
 public class MainActivity extends AppCompatActivity {
     private EditText mEmail, mPassword;
     private Button mLogin, mRegistration;
@@ -71,7 +81,8 @@ public class MainActivity extends AppCompatActivity {
                             //this database reference is pointing to the technicians
                             DatabaseReference current_user_db = FirebaseDatabase.getInstance().getReference().child("Users").child(user_id);
                             current_user_db.setValue(true);
-                            current_user_db = FirebaseDatabase.getInstance().getReference().child("Users").child(user_id).child("email");
+                            current_user_db = FirebaseDatabase.getInstance().getReference().child("Users")
+                                    .child(user_id).child("email");
                             current_user_db.setValue(email);
                         }
                     }

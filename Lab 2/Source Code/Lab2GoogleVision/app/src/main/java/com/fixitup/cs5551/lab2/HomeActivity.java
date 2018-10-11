@@ -292,7 +292,7 @@ public class HomeActivity extends AppCompatActivity {
             }
         }
     }
-
+    //Driver function
     private void callCloudVision(final Bitmap bitmap) {
         // Switch text to loading
         mImageDetails.setText(R.string.loading_message);
