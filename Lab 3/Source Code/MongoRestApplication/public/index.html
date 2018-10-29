@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" ng-app="myApp" class="no-js"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>My AngularJS App</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="app.css">
+
+    <style>
+
+        .menu input{
+            width: 300px;
+            background: transparent;
+            border: 2px solid #BDB76B;
+            border-radius: 4px;
+            color: #228B22;
+            font-family: 'Exo', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            padding: 6px;
+            margin-top: 10px;
+        }
+        .menu button{
+            width: 419px;
+            height:40px;
+            background:#BDB76B;
+            border:  2px solid #ffffff;
+            cursor: pointer;
+            border-radius: 4px;
+            color: #ffffff;
+            font-family: 'Exo', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            padding: 6px;
+            margin-top: 10px;
+        }
+        table {
+            max-width: 960px;
+            margin: 10px auto;
+            border: 1px solid #FFF;
+        }
+
+        caption {
+            font-size: 1.6em;
+            font-weight: 400;
+            padding: 10px 0;
+        }
+
+        thead th {
+            font-weight: 400;
+            background: #8a97a0;
+            color: #FFF;
+        }
+
+        tr {
+            background: #f4f7f8;
+            border: 1px solid #FFF;
+            margin-bottom: 5px;
+        }
+
+        tr:nth-child(even) {
+            background: #e8eeef;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 20px;
+            font-weight: 300;
+        }
+
+        tfoot tr {
+            background: none;
+        }
+
+        tfoot td {
+            padding: 10px 2px;
+            font-size: 0.8em;
+            font-style: italic;
+            color: #BDB76B;
+        }
+    </style>
+
+</head>
+<body class="body">
+
+
+<div  ng-controller="View1Ctrl" style="top: 200px">
+    <div class="menu" id="div_SearchContainer">
+        <h1 align="absolute" style="text-align: center; color: #BDB76B">Calculate your trip's distance now!</h1>
+        <input type="text" id="txt_placeName" placeholder="Enter the origin you want to start with..." style="margin-left: 100px"/>
+        <input type="text" id="txt_searchFilter" placeholder="Enter the destination..."/>
+        <button id="btn_getReview">Get Distances between your Locations</button></form>
+    </div>
+    <div class = "menu" id="div_VenueList">
+        <h2 style="text-align: center; color: #BDB76B"> Results are calculated using Google Distance Matrix API </h2>
+        <ul>
+            <p id = "distanceField"style="font-size: x-large; color: #5e5e5e; text-align: center;"></p>
+        </ul>
+        <div style="text-align:center">
+            <button id="btn_gotoPay" style="display: none">Proceed to Payment</button></form>
+            <button id="btn_restart">Restart Session</button></form>
+        </div>
+
+    </div>
+    <div id="div_ReviewList" style="display:none;"  >
+
+
+        <p ng-model="ReviewWithSentiment">
+
+        <TABLE BORDER=2 CELLPADDING=4 ng-show="showt"> <TR> <TH style="color: aliceblue; background:#1ab188" COLSPAN=2>Sentiment Analysis From Using Alchemy API </TH> </TR>
+            <TR> <TD>Most recent review</TD> <TD>{{ReviewWithSentiment.reviewText}}</TD> </TR>
+            <TR> <TD>Sentiment of the review</TD> <TD>{{ReviewWithSentiment.sentiment}}</TD> </TR>
+            <TR> <TD>Sentiment Score of the review</TD> <TD>{{ReviewWithSentiment.score}}</TD> </TR>
+            <TR> <TH style="color: aliceblue; background:#1ab188" COLSPAN=2 BGCOLOR="#445553">{{ReviewWithSentiment.reviewText}}</TH> </TR>
+        </TABLE>
+        <span ng-show="shows" style="text-align: center;">{{noText}}</span>
+        </p>
+    </div>
+</div>
+
+
+<!-- In production use:
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
+-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.min.js"></script>
+<script src="app.js"></script>
+<script>
+    $(document).ready(function() {
+        let url = '/getDistance';
+        $("#btn_getReview").click(function() {
+            $("#demo").html("Hello, World!");
+
+            let data = {
+                origin: $("#txt_placeName").val(),
+                destination: $("#txt_searchFilter").val()
+            };
+            $.ajax({
+                url: url,
+                method: 'POST',
+                data: data,
+                dataType: 'json'
+            }).done(function (response) {
+                console.log(response);
+                for (var i = 0; i<response.location.length; i++){
+                    console.log("\nThe Distance that it takes to travel is: " + response.location[i].distance);
+                    console.log("\nThe Traveling Time is: " + response.location[i].duration);
+                    var result = "\nThe Distance is: " + response.location[i].distance
+                        + "\nThe Time is: " + response.location[i].duration + "\n\n\n NOTE: Result cannot be changed unless session is restarted!"
+                    $("#distanceField").html(result);
+                    $("#distanceField").css("white-space","pre-line"); //break down to multiple lines
+                    $("#txt_placeName").prop('disabled', true);
+                    $("#txt_searchFilter").prop('disabled', true);
+                    $("#btn_gotoPay").show();
+                }
+            }).fail(function() {
+                alert("Sorry. Server unavailable. ");
+            });
+            $("#demo").html("Bye bye, World!");
+        });
+        $("#btn_restart").click(function() {
+            $("#distanceField").html("");
+            $("#txt_placeName").val("");
+            $("#txt_searchFilter").val("");
+            $("#txt_placeName").prop('disabled', false);
+            $("#txt_searchFilter").prop('disabled', false);
+            $("#btn_gotoPay").hide();
+        });
+    });
+</script>
+
+</body>
+</html>

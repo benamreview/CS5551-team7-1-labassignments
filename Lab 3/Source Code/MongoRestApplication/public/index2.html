@@ -1,0 +1,121 @@
+<html ng-app="demoMongo" ng-controller="MongoRestController">
+<head >
+    <title>Student Registration and Search</title>
+    <link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <link href='http://fonts.googleapis.com/css?family=Rokkitt' rel='stylesheet' type='text/css'>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <style type="text/css">
+        .site-bg {
+            position: fixed;
+            height: 100%;
+            width: 100%;
+            z-index: 0;
+            background-image: url(images/bg.jpg);
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        .site-bg-overlay {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            background: rgba(92, 180, 142, 0.4);
+        }
+
+    </style>
+</head>
+<body>
+<div class="wrap" style="width:30%;">
+    <!-- strat-contact-form -->
+    <div class="contact-form" style="width:100%;">
+        <!-- start-form -->
+        <form class="contact_form"  style="background: #FFF; width:100%;" ng-submit="insertData()" name="contact_form">
+            <h1>Sign Up Here</h1>
+            <ul>
+                <li style="width:100%;">
+                    <input type="text" class="textbox1" name="classID" placeholder="Class ID" ng-model="formData.classID" required />
+                    <span class="form_hint">Enter a Class ID</span>
+                    <p><img src="images/contact.png" alt=""></p>
+                </li>
+                <li style="width:100%;">
+                    <input type="text" class="textbox1" name="sName" ng-model="formData.sName" placeholder="Student Name" required />
+                    <span class="form_hint">Enter the Student's Name</span>
+                    <p><img src="images/contact.png" alt=""></p>
+                </li>
+                <li style="width:100%;">
+                    <input type="text" class="textbox1" name="course" ng-model="formData.course" placeholder="Course of Study" required />
+                    <span class="form_hint">Enter a Course of Study</span>
+                    <p><img src="images/contact.png" alt=""></p>
+                </li>
+                <li style="width:100%;">
+                    <input type="text" class="textbox1" name="major" ng-model="formData.major" placeholder="Major" required />
+                    <span class="form_hint">Enter a Major</span>
+                    <p><img src="images/contact.png" alt=""></p>
+                </li>
+                <li style="width:100%;">
+                    <input type="text" class="textbox1" name="minor" ng-model="formData.minor" placeholder="Minor" required />
+                    <span class="form_hint">Enter a Minor</span>
+                    <p><img src="images/contact.png" alt=""></p>
+                </li>
+            </ul>
+            <input type="submit" name="Sign In" style="width:100%;" value="Sign In"/>
+            <div class="clear"></div>
+            <label class="checkbox"><input type="checkbox" name="checkbox" checked><i></i>Remember me</label>
+            <div class="clear"></div>
+        </form>
+        <!-- end-form -->
+        <!-- start-form -->
+        <form class="contact_form"  style="background: #FFF; width:100%;" ng-submit="searchData()" name="contact_form2">
+            <h1>Search for Major Here!</h1>
+            <ul>
+                <li style="width:100%;">
+                    <input type="text" class="textbox1" name="sCourse" ng-model="formData.sCourse" placeholder="Course of Study" required />
+                    <span class="form_hint">Enter a Course of Study you want to search</span>
+                    <p><img src="images/contact.png" alt=""></p>
+                </li>
+            </ul>
+            <input type="submit" name="Search" style="width:100%;" value="Search"/>
+            <div class="clear"></div>
+            <label class="checkbox"><input type="checkbox" name="checkbox" checked><i></i>Remember me</label>
+            <div class="clear"></div>
+        </form>
+        <!-- end-form -->
+        <ol>
+            <li ng-repeat="r in studentList">
+                <h1 class="widget-title">{{r.name}}</h1>
+                <div class="">
+                    <div>
+                        Class ID: <a href="{{r.id}}"> {{r.id}}</a>
+                    </div>
+                    <div>
+                        Course: <a href="{{r.course}}"> {{r.course}}</a>
+                    </div>
+                    <div>
+                        Major: <a href="{{r.major}}"> {{r.major}}</a>
+                    </div>
+                    <div>
+                        Minor: <a href="{{r.minor}}"> {{r.minor}}</a>
+                    </div>
+                </div>
+            </li>
+        </ol>
+        <!-- start-account -->
+        <div class="clear"></div>
+    </div>
+    <!-- end-contact-form -->
+    <div class="footer">
+
+    </div>
+</div>
+<script type="text/javascript" src="http://code.angularjs.org/1.1.1/angular.js"></script>
+<script type="text/javascript" src="http://code.angularjs.org/1.1.1/angular-resource.js"></script>
+<script type="text/javascript" src="http://code.angularjs.org/1.1.1/angular-sanitize.js"></script>
+<script src="js/index.js"></script>
+</body>
+</html>
