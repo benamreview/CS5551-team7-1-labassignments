@@ -151,12 +151,15 @@
                     console.log("\nThe Distance that it takes to travel is: " + response.location[i].distance);
                     console.log("\nThe Traveling Time is: " + response.location[i].duration);
                     var result = "\nThe Distance is: " + response.location[i].distance
-                        + "\nThe Time is: " + response.location[i].duration + "\n\n\n NOTE: Result cannot be changed unless session is restarted!"
+                        + "\nThe Time is: " + response.location[i].duration
+                        + "\nThe Cost is: $" + response.location[i].charge
+                        + "\n\n\n NOTE: Result cannot be changed unless session is restarted!"
                     $("#distanceField").html(result);
                     $("#distanceField").css("white-space","pre-line"); //break down to multiple lines
                     $("#txt_placeName").prop('disabled', true);
                     $("#txt_searchFilter").prop('disabled', true);
                     $("#btn_gotoPay").show();
+                    localStorage["charge"] = response.location[i].charge;
                 }
             }).fail(function() {
                 alert("Sorry. Server unavailable. ");
@@ -170,6 +173,9 @@
             $("#txt_placeName").prop('disabled', false);
             $("#txt_searchFilter").prop('disabled', false);
             $("#btn_gotoPay").hide();
+        });
+        $("#btn_gotoPay").click(function() {
+            window.location.href = "index2.html";
         });
     });
 </script>

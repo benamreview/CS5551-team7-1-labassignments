@@ -12,6 +12,16 @@ myapp.run(function ($http) {
 //These are the necessary variables in the requirements:
 // Class ID, Student's Name, Course Of Study, Major, and Minor
 myapp.controller('MongoRestController',function($scope,$http){
+    console.log(localStorage.getItem("charge"));
+    $scope.tripCharge = localStorage.getItem("charge");
+    $scope.tripChargeStr = "$"+ localStorage.getItem("charge");
+    // Check browser support
+    /*if (typeof(Storage) !== "undefined") {
+        // Retrieve
+        $("#txt_placeName").val(localStorage.getItem("charge")) ;
+    } else {
+        document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
+    }*/
     $scope.insertData = function(){
         console.log($scope.formData.classID);
         console.log($scope.formData.sName);
@@ -28,7 +38,8 @@ myapp.controller('MongoRestController',function($scope,$http){
             'sName' : $scope.formData.sName,
             'course' : $scope.formData.course,
             'major' : $scope.formData.major,
-            'minor' : $scope.formData.minor
+            'minor' : $scope.formData.minor,
+            'cost' : $scope.tripCharge
         };
         var config = {
             headers : {

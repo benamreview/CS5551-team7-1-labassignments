@@ -145,9 +145,11 @@ app.post('/getDistance', function (req, res) {
         res.writeHead(200, {'Content-Type': 'application/json'});
         var loc = body.rows[0].elements; //first item of rows in JSON file
         for (var i = 0; i < loc.length; i++) {
+            var cost = parseInt(loc[i].duration.text.toString().substr(0,1))*5.55;
             result.location.push({
                 'distance': loc[i].distance.text,
-                'duration': loc[i].duration.text.toString()
+                'duration': loc[i].duration.text.toString(),
+                'charge': cost
             });
         }
         JSONResult = JSON.stringify(result);
