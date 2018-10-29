@@ -40,7 +40,7 @@
     <div class="contact-form" style="width:100%;">
         <!-- start-form -->
         <form class="contact_form"  style="background: #FFF; width:100%;" ng-submit="insertData()" name="contact_form">
-            <h1>Sign Up Here</h1>
+            <h1>Contact and Payment Information</h1>
             <ul>
                 <li style="width:100%;">
                     <input type="text" class="textbox1" name="classID" placeholder="Class ID" ng-model="formData.classID" required />
@@ -79,6 +79,42 @@
             <div class="clear"></div>
         </form>
         <!-- end-form -->
+
+        <!--Paypal-->
+        <script src="https://www.paypalobjects.com/api/checkout.js"></script>
+
+        <div id="paypal-button"></div>
+
+        <script>
+            /*paypal.Button.render({
+                env: 'sandbox', // Or 'production'
+                // Set up the payment:
+                // 1. Add a payment callback
+                payment: function(data, actions) {
+                    // 2. Make a request to your server
+                    return actions.request.post('/my-api/create-payment/')
+                        .then(function(res) {
+                            // 3. Return res.id from the response
+                            return res.id;
+                        });
+                },
+                // Execute the payment:
+                // 1. Add an onAuthorize callback
+                onAuthorize: function(data, actions) {
+                    // 2. Make a request to your server
+                    return actions.request.post('/my-api/execute-payment/', {
+                        paymentID: data.paymentID,
+                        payerID:   data.payerID
+                    })
+                        .then(function(res) {
+                            // 3. Show the buyer a confirmation message.
+                            console.log(res.status);
+                            insertData();
+                        });
+                }
+            }, '#paypal-button'); */
+        </script>
+        <!--PayPal ends-->
         <!-- start-form -->
         <form class="contact_form"  style="background: #FFF; width:100%;" ng-submit="searchData()" name="contact_form2">
             <h1>Search for Major Here!</h1>

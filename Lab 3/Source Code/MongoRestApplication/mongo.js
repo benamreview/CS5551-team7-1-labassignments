@@ -93,7 +93,109 @@ var findUserbyMajor = function(db, data, callback) {
         callback(resultobj);
     })
 }
-
+//////////////////////PAYPAL///////////////////////
+var finalcharge;
+var CLIENT =
+    'AdelrBoc-gbOvljfEItnJLqn5DO73k7ugNM70a-PYqK4MbdjxEyjoeTIGSbGLnAX4PczYZ4rFooMvtSg';
+var SECRET =
+    'EK6fuN4e_sPU019FnaRFnpnDDBxX0rekidL_X3kP6iz8DWd628bcShpDia_9carTqH93GmUMbbXH-3JN';
+var PAYPAL_API = 'https://api.sandbox.paypal.com';
+app
+// Set up the payment:
+// 1. Set up a URL to handle requests from the PayPal button
+    .post('/my-api/create-payment/', function(req, res)
+    {
+        console.log(finalcharge);
+        // 2. Call /v1/payments/payment to set up the payment
+        request.post(PAYPAL_API + '/v1/payments/payment',
+            {
+                auth:
+                    {
+                        user: CLIENT,
+                        pass: SECRET
+                    },
+                body:
+                    {
+                        intent: 'sale',
+                        payer:
+                            {
+                                payment_method: 'paypal'
+                            },
+                        transactions: [
+                            {
+                                amount:
+                                    {
+                                        total: '1.25',
+                                        currency: 'USD'
+                                    }
+                            }],
+                        redirect_urls:
+                            {
+                                return_url: 'https://www.mysite.com',
+                                cancel_url: 'https://www.mysite.com'
+                            }
+                    },
+                json: true
+            }, function(err, response)
+            {
+                if (err)
+                {
+                    console.error(err);
+                    return res.sendStatus(500);
+                }
+                console.log(finalcharge);
+                // 3. Return the payment ID to the client
+                res.json(
+                    {
+                        id: response.body.id
+                    });
+            });
+    })
+    // Execute the payment:
+    // 1. Set up a URL to handle requests from the PayPal button.
+    .post('/my-api/execute-payment/', function(req, res)
+    {
+        // 2. Get the payment ID and the payer ID from the request body.
+        var paymentID = req.body.paymentID;
+        var payerID = req.body.payerID;
+        // 3. Call /v1/payments/payment/PAY-XXX/execute to finalize the payment.
+        request.post(PAYPAL_API + '/v1/payments/payment/' + paymentID +
+            '/execute',
+            {
+                auth:
+                    {
+                        user: CLIENT,
+                        pass: SECRET
+                    },
+                body:
+                    {
+                        payer_id: payerID,
+                        transactions: [
+                            {
+                                amount:
+                                    {
+                                        total: finalcharge,
+                                        currency: 'USD'
+                                    }
+                            }]
+                    },
+                json: true
+            },
+            function(err, response)
+            {
+                if (err)
+                {
+                    console.error(err);
+                    return res.sendStatus(500);
+                }
+                // 4. Return a success response to the client
+                res.json(
+                    {
+                        status: 'success'
+                    });
+            });
+    });
+///////////////////////////////////////////////////
 ///////////////////From ICP 10
 var bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -151,6 +253,8 @@ app.post('/getDistance', function (req, res) {
                 'duration': loc[i].duration.text.toString(),
                 'charge': cost
             });
+            finalcharge = cost;
+
         }
         JSONResult = JSON.stringify(result);
         console.log(JSONResult);
