@@ -3,7 +3,6 @@
  */
 
 var MongoClient = require('mongodb').MongoClient;
-var assert = require('assert');
 var request = require('request');
 var bodyParser = require("body-parser");
 var express = require('express');
@@ -17,6 +16,79 @@ var url = 'mongodb://root:Tuthano1o1o@ds143953.mlab.com:43953/cs5551lab';
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+///////////////////From ICP 10
+app.use(express.static(path.join(__dirname, 'public')));
+app.get("/home", function(req, res)
+{
+    res.sendFile(path.join(__dirname,'public', 'home.html'));
+});
+app.get("/index", function(req, res)
+{
+    res.sendFile(path.join(__dirname,'public', 'index.html'));
+});
+app.post('/getDistance', function (req, res) {
+    var origin = req.body.origin;
+    var destination = req.body.destination;
+    var result={
+        'location': []
+    };
+    //res.render(__dirname + "/index.html", {name:name});
+
+    console.log("In restDistance " + origin + destination);
+    request('https://maps.googleapis.com/maps/api/distancematrix/json?' +
+        'language=en&units=imperial' +
+        '&origins=' + origin +
+        '&destinations=' + destination +
+        '&key=AIzaSyB087vg5c4hTnohVi4sjP63cHv4Eh3jt2s', function (error, response, body) {
+        //Check for error
+        if(error){
+            return console.log('Error:', error);
+        }
+
+        //Check for right status code
+        if(response.statusCode !== 200){
+            return console.log('Invalid Status Code Returned:', response.statusCode);
+        }
+        //All is good. Print the body
+        body = JSON.parse(body);
+        var loc = body.rows[0].elements; //first item of rows in JSON file
+        //console.log(loc.elements[0].distance.text);
+        //console.log(body.destination_addresses[0]);
+        //console.log(loc.length);
+        for(var i=0;i<loc.length;i++)
+        {
+            result.location.push({'distance': loc[i].distance.text,
+                'duration':loc[i].duration.text.toString()});
+        }
+        res.writeHead(200, {'Content-Type': 'application/json'});
+        var loc = body.rows[0].elements; //first item of rows in JSON file
+        for (var i = 0; i < loc.length; i++) {
+            var cost = parseInt(loc[i].duration.text.toString().substr(0,1))*5.55;
+            result.location.push({
+                'origin': body.origin_addresses,
+                'destination': body.destination_addresses,
+                'distance': loc[i].distance.text,
+                'duration': loc[i].duration.text.toString(),
+                'charge': cost
+            });
+            finalcharge = cost;
+
+        }
+        JSONResult = JSON.stringify(result);
+        console.log(JSONResult);
+        for (var i = 0; i<result.location.length; i++){
+            console.log("\nThe Distance is: " + result.location[i].distance);
+            console.log("\nThe Time is: " + result.location[i].duration);
+        }
+        res.write(JSONResult);
+        res.end();
+    });
+    console.log(result);
+
+
+});
+
+
 app.post('/register', function (req, res) {
     MongoClient.connect(url,{ useNewUrlParser: true }, function(err, client) {
         if(err)
@@ -71,7 +143,7 @@ app.post('/search', function (req, res) {
         const db = client.db('cs5551lab');
         //FinduserbyMajor is the function that takes the req.body (result from the form)
         //to pass to the mongoDB instance as an query entry for comparison and searching.
-        findUserbyMajor(db, req.body, function(resultobj) {
+        findInfobyName(db, req.body, function(resultobj) {
             console.log("IN CALLBACK!");
             client.close();
             console.log(resultobj);
@@ -83,8 +155,8 @@ app.post('/search', function (req, res) {
     });
 });
 
-var findUserbyMajor = function(db, data, callback) {
-    var cursor = db.collection('TaxiCustomers').find({"cName": data.cName});
+var findInfobyName = function(db, data, callback) {
+    var cursor = db.collection('TaxiCustomers').find({"cName": data.custName});
     //To Array is an asynchronous function that turns all the cursors (documents) into an array
     //The function that succeeds toArray() is a callback method with result as the retrieved data.
     cursor.toArray(function(err, result){
@@ -196,80 +268,6 @@ app
             });
     });
 ///////////////////////////////////////////////////
-///////////////////From ICP 10
-var bodyParser = require("body-parser");
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, 'public')));
-app.get("/home", function(req, res)
-{
-    res.sendFile(path.join(__dirname,'public', 'home.html'));
-});
-app.get("/index", function(req, res)
-{
-    res.sendFile(path.join(__dirname,'public', 'index.html'));
-});
-app.post('/getDistance', function (req, res) {
-    var origin = req.body.origin;
-    var destination = req.body.destination;
-    var result={
-        'location': []
-    };
-    //res.render(__dirname + "/index.html", {name:name});
-
-    console.log("In restDistance " + origin + destination);
-    request('https://maps.googleapis.com/maps/api/distancematrix/json?' +
-        'language=en&units=imperial' +
-        '&origins=' + origin +
-        '&destinations=' + destination +
-        '&key=AIzaSyB087vg5c4hTnohVi4sjP63cHv4Eh3jt2s', function (error, response, body) {
-        //Check for error
-        if(error){
-            return console.log('Error:', error);
-        }
-
-        //Check for right status code
-        if(response.statusCode !== 200){
-            return console.log('Invalid Status Code Returned:', response.statusCode);
-        }
-        //All is good. Print the body
-        body = JSON.parse(body);
-        var loc = body.rows[0].elements; //first item of rows in JSON file
-        //console.log(loc.elements[0].distance.text);
-        //console.log(body.destination_addresses[0]);
-        //console.log(loc.length);
-        for(var i=0;i<loc.length;i++)
-        {
-            result.location.push({'distance': loc[i].distance.text,
-                'duration':loc[i].duration.text.toString()});
-        }
-        res.writeHead(200, {'Content-Type': 'application/json'});
-        var loc = body.rows[0].elements; //first item of rows in JSON file
-        for (var i = 0; i < loc.length; i++) {
-            var cost = parseInt(loc[i].duration.text.toString().substr(0,1))*5.55;
-            result.location.push({
-                'origin': body.origin_addresses,
-                'destination': body.destination_addresses,
-                'distance': loc[i].distance.text,
-                'duration': loc[i].duration.text.toString(),
-                'charge': cost
-            });
-            finalcharge = cost;
-
-        }
-        JSONResult = JSON.stringify(result);
-        console.log(JSONResult);
-        for (var i = 0; i<result.location.length; i++){
-            console.log("\nThe Distance is: " + result.location[i].distance);
-            console.log("\nThe Time is: " + result.location[i].duration);
-        }
-        res.write(JSONResult);
-        res.end();
-    });
-    console.log(result);
-
-
-});
-
 ///////////////////////This is used to deploy to Heroku//////////////////
 var port = process.env.PORT || 8080;
 var server = http.listen(port, function () {
