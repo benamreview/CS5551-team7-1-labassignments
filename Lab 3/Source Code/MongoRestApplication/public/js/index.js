@@ -15,6 +15,8 @@ myapp.controller('MongoRestController',function($scope,$http){
     console.log(localStorage.getItem("charge"));
     $scope.tripCharge = localStorage.getItem("charge");
     $scope.tripChargeStr = "$"+ localStorage.getItem("charge");
+    $scope.origin_address = localStorage.getItem("origin");
+    $scope.destination_address = localStorage.getItem("destination");
     // Check browser support
     /*if (typeof(Storage) !== "undefined") {
         // Retrieve
@@ -23,22 +25,22 @@ myapp.controller('MongoRestController',function($scope,$http){
         document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
     }*/
     $scope.insertData = function(){
-        console.log($scope.formData.classID);
-        console.log($scope.formData.sName);
-        console.log($scope.formData.course);
-        console.log($scope.formData.major);
-        console.log($scope.formData.minor);
+        /*console.log($scope.formData.tName);
+        console.log($scope.formData.cName);
+        console.log($scope.formData.email);
+        console.log($scope.formData.origin);
+        console.log($scope.formData.destination);*/
         //Since formData also contains the variable sCourse which may or may not exist
         //sCourse, even though belonging to another form, is still a part of the formData
         //If formdata is passed instead of a subset dataParams,
         //sCourse will also be inserted into the MongoDB, which should not be the case,
         //because sCourse is only a search term.
         var dataParams = {
-            'classID' : $scope.formData.classID,
-            'sName' : $scope.formData.sName,
-            'course' : $scope.formData.course,
-            'major' : $scope.formData.major,
-            'minor' : $scope.formData.minor,
+            'tName' : $scope.formData.tName,
+            'cName' : $scope.formData.cName,
+            'email' : $scope.formData.email,
+            'origin' : $scope.origin_address,
+            'destination' : $scope.destination_address,
             'cost' : $scope.tripCharge
         };
         var config = {
@@ -56,8 +58,8 @@ myapp.controller('MongoRestController',function($scope,$http){
         //If the insertion is successful, the server will respond with a success message such as
         //"Inserted Successfully
         req.success(function(data, status, headers, config) {
-            console.log("HELLO!");
-            $scope.message = data;
+            console.log("in Client's Success function!");
+            //$scope.message = data;
             //console.log(data);
         });
         req.error(function(data, status, headers, config) {
@@ -69,7 +71,7 @@ myapp.controller('MongoRestController',function($scope,$http){
     //for attribute "Major" from the user
     //E.g: Computer Science, Marketing, Law, Philosophy, Art, ...
     $scope.searchData = function(){
-        console.log($scope.formData.sCourse);
+        console.log($scope.formData.cName);
         var config = {
             headers : {
                 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
@@ -81,19 +83,20 @@ myapp.controller('MongoRestController',function($scope,$http){
         req.success(function(data, status, headers, config) {
             $scope.message = data;
             console.log("IN SUCCESS");
-
+            console.log(data);
             //studentList will be used to store the JSON result from the retrieved data of the server
             //and also be passed to the HTML page to display as an Angular directive {{ }}
-            $scope.studentList = [];
+            $scope.tripList = [];
             for (var i = 0; i < data.length; i++) {
                 //All the necessary fields will be extracted and stored in the studentList object that
                 //will be displayed in the HTML page
-                $scope.studentList[i]= {
-                    "id": data[i].classID,
-                    "name": data[i].sName,//Long name of item retrieved in API
-                    "course": data[i].course,//Serving Size in Grams
-                    "major": data[i].major,
-                    "minor": data[i].minor//number of calories in the food type
+                $scope.tripList[i]= {
+                    "tName": data[i].tName,
+                    "cName": data[i].cName,//Long name of item retrieved in API
+                    "email": data[i].email,//Serving Size in Grams
+                    "origin": data[i].origin,
+                    "destination": data[i].destination,//number of calories in the food type
+                    "cost": data[i].cost
                 };
             }
         });
@@ -105,6 +108,19 @@ myapp.controller('MongoRestController',function($scope,$http){
     };
     paypal.Button.render({
         env: 'sandbox', // Or 'production'
+        //Button Style Customization
+        style: {
+            label: 'pay',
+            size:  'responsive',    // small | medium | large | responsive
+            shape: 'pill',     // pill | rect
+            color: 'blue',      // gold | blue | silver | black
+            layout: 'horizontal',
+            fundingicons: 'true',
+        },
+        funding: {
+            allowed: [paypal.FUNDING.CREDIT],
+            //disallowed: [ paypal.FUNDING.CARD ]
+        },
         // Set up the payment:
         // 1. Add a payment callback
         payment: function(data, actions) {
@@ -125,7 +141,7 @@ myapp.controller('MongoRestController',function($scope,$http){
             })
                 .then(function(res) {
                     // 3. Show the buyer a confirmation message.
-                    console.log(res.status);
+                    console.log("Paypal Server's Returned Status: " + res.status);
                     $scope.insertData();
                 });
         }

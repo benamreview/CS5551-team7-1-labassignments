@@ -160,6 +160,8 @@
                     $("#txt_searchFilter").prop('disabled', true);
                     $("#btn_gotoPay").show();
                     localStorage["charge"] = response.location[i].charge;
+                    localStorage["origin"] = response.location[i].origin;
+                    localStorage["destination"] = response.location[i].destination;
                 }
             }).fail(function() {
                 alert("Sorry. Server unavailable. ");

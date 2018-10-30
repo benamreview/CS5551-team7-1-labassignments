@@ -12,7 +12,7 @@ var app = express();
 var path = require('path');
 var http = require('http').Server(app);
 //MongoDB URL
-var url = 'mongodb://root:Tuthano1o1o@ds235243.mlab.com:35243/cs5551icp';
+var url = 'mongodb://root:Tuthano1o1o@ds143953.mlab.com:43953/cs5551lab';
 //var url = 'mongodb://marmik:2621@ds051923.mlab.com:51923/demo';
 app.use(cors());
 app.use(bodyParser.json());
@@ -28,7 +28,7 @@ app.post('/register', function (req, res) {
             console.log("CLIENT IS NULL");
         }
         //cs5551icp is my MongoDB database that holds all the records of the students
-        const db = client.db('cs5551icp');
+        const db = client.db('cs5551lab');
 
         //insertDocument is called with req.body as a parameter that contains all the necessary fields
         //(input from user) and will immediately call the insert() function from the MongoDB database
@@ -46,7 +46,7 @@ var insertDocument = function(db, data, callback) {
     //callback() will be called as soon as the insertion has finished
     //callback() method will simply close the database client, and finalize
     //the response stream of the Express Server
-    db.collection('users').insertOne( data, function(err, result) {
+    db.collection('TaxiCustomers').insertOne( data, function(err, result) {
         if(err)
         {
             res.write("Registration Failed, Error While Registering");
@@ -68,7 +68,7 @@ app.post('/search', function (req, res) {
             console.log("CLIENT IS NULL");
         }
         //cs5551icp is my MongoDB database that holds all the records of the students
-        const db = client.db('cs5551icp');
+        const db = client.db('cs5551lab');
         //FinduserbyMajor is the function that takes the req.body (result from the form)
         //to pass to the mongoDB instance as an query entry for comparison and searching.
         findUserbyMajor(db, req.body, function(resultobj) {
@@ -84,7 +84,7 @@ app.post('/search', function (req, res) {
 });
 
 var findUserbyMajor = function(db, data, callback) {
-    var cursor = db.collection('users').find({"major": data.sCourse});
+    var cursor = db.collection('TaxiCustomers').find({"cName": data.cName});
     //To Array is an asynchronous function that turns all the cursors (documents) into an array
     //The function that succeeds toArray() is a callback method with result as the retrieved data.
     cursor.toArray(function(err, result){
@@ -214,8 +214,6 @@ app.post('/getDistance', function (req, res) {
     var result={
         'location': []
     };
-    var name = 'hello';
-
     //res.render(__dirname + "/index.html", {name:name});
 
     console.log("In restDistance " + origin + destination);
@@ -249,6 +247,8 @@ app.post('/getDistance', function (req, res) {
         for (var i = 0; i < loc.length; i++) {
             var cost = parseInt(loc[i].duration.text.toString().substr(0,1))*5.55;
             result.location.push({
+                'origin': body.origin_addresses,
+                'destination': body.destination_addresses,
                 'distance': loc[i].distance.text,
                 'duration': loc[i].duration.text.toString(),
                 'charge': cost

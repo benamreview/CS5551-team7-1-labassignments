@@ -35,7 +35,7 @@
 
 
 </script>
-<div class="wrap" style="width:30%;">
+<div class="wrap" style="width:40%;">
     <!-- strat-contact-form -->
     <div class="contact-form" style="width:100%;">
         <!-- start-form -->
@@ -43,28 +43,28 @@
             <h1>Contact and Payment Information</h1>
             <ul>
                 <li style="width:100%;">
-                    <input type="text" class="textbox1" name="classID" placeholder="Class ID" ng-model="formData.classID" required />
-                    <span class="form_hint">Enter a Class ID</span>
+                    <input type="text" class="textbox1" name="tName" placeholder="Trip's Name" ng-model="formData.tName" required />
+                    <span class="form_hint">Please enter the Trip's name</span>
                     <p><img src="images/contact.png" alt=""></p>
                 </li>
                 <li style="width:100%;">
-                    <input type="text" class="textbox1" name="sName" ng-model="formData.sName" placeholder="Student Name" required />
-                    <span class="form_hint">Enter the Student's Name</span>
+                    <input type="text" class="textbox1" name="cName" ng-model="formData.cName" placeholder="Customer's Name" required />
+                    <span class="form_hint">Please enter your name</span>
                     <p><img src="images/contact.png" alt=""></p>
                 </li>
                 <li style="width:100%;">
-                    <input type="text" class="textbox1" name="course" ng-model="formData.course" placeholder="Course of Study" required />
-                    <span class="form_hint">Enter a Course of Study</span>
+                    <input type="text" class="textbox1" name="email" ng-model="formData.email" placeholder="example@gmail.com" required />
+                    <span class="form_hint">Please enter your email</span>
                     <p><img src="images/contact.png" alt=""></p>
                 </li>
                 <li style="width:100%;">
-                    <input type="text" class="textbox1" name="major" ng-model="formData.major" placeholder="Major" required />
-                    <span class="form_hint">Enter a Major</span>
+                    <input type="text" class="textbox1" name="origin" ng-model="origin_address" placeholder="Pick-up Location" disabled />
+                    <span class="form_hint">Please enter your origin address</span>
                     <p><img src="images/contact.png" alt=""></p>
                 </li>
                 <li style="width:100%;">
-                    <input type="text" class="textbox1" name="minor" ng-model="formData.minor" placeholder="Minor" required />
-                    <span class="form_hint">Enter a Minor</span>
+                    <input type="text" class="textbox1" name="destination" ng-model="destination_address" placeholder="Drop-off Location" disabled />
+                    <span class="form_hint">Please enter your destination address</span>
                     <p><img src="images/contact.png" alt=""></p>
                 </li>
                 <li style="width:100%;">
@@ -72,80 +72,54 @@
                     <span class="form_hint">Overall Cost from Previous Estimation</span>
                     <p><img src="images/contact.png" alt=""></p>
                 </li>
+                <li style="margin-left: 25%;width:50%;height:10%;text-align:center" >
+                    <div id="paypal-button" style="text-align:center"></div>
+                </li>
             </ul>
-            <input type="submit" name="Sign In" style="width:100%;" value="Sign In"/>
+            <!--<input type="submit" name="Sign In" style="width:100%;" value="Sign In"/>
             <div class="clear"></div>
             <label class="checkbox"><input type="checkbox" name="checkbox" checked><i></i>Remember me</label>
-            <div class="clear"></div>
+            <div class="clear"></div> -->
         </form>
         <!-- end-form -->
 
         <!--Paypal-->
-        <script src="https://www.paypalobjects.com/api/checkout.js"></script>
+        <script src="https://www.paypalobjects.com/api/checkout.js"></script><div class="clear" style="height:10%"></div>
 
-        <div id="paypal-button"></div>
 
-        <script>
-            /*paypal.Button.render({
-                env: 'sandbox', // Or 'production'
-                // Set up the payment:
-                // 1. Add a payment callback
-                payment: function(data, actions) {
-                    // 2. Make a request to your server
-                    return actions.request.post('/my-api/create-payment/')
-                        .then(function(res) {
-                            // 3. Return res.id from the response
-                            return res.id;
-                        });
-                },
-                // Execute the payment:
-                // 1. Add an onAuthorize callback
-                onAuthorize: function(data, actions) {
-                    // 2. Make a request to your server
-                    return actions.request.post('/my-api/execute-payment/', {
-                        paymentID: data.paymentID,
-                        payerID:   data.payerID
-                    })
-                        .then(function(res) {
-                            // 3. Show the buyer a confirmation message.
-                            console.log(res.status);
-                            insertData();
-                        });
-                }
-            }, '#paypal-button'); */
-        </script>
         <!--PayPal ends-->
         <!-- start-form -->
         <form class="contact_form"  style="background: #FFF; width:100%;" ng-submit="searchData()" name="contact_form2">
-            <h1>Search for Major Here!</h1>
+            <h1>Search for Any Trip Information Here!</h1>
             <ul>
                 <li style="width:100%;">
-                    <input type="text" class="textbox1" name="sCourse" ng-model="formData.sCourse" placeholder="Course of Study" required />
-                    <span class="form_hint">Enter a Course of Study you want to search</span>
+                    <input type="text" class="textbox1" name="cName" ng-model="formData.cName" placeholder="Customer's Name" required />
+                    <span class="form_hint">Enter the Customer's name you want to search</span>
                     <p><img src="images/contact.png" alt=""></p>
                 </li>
             </ul>
             <input type="submit" name="Search" style="width:100%;" value="Search"/>
             <div class="clear"></div>
-            <label class="checkbox"><input type="checkbox" name="checkbox" checked><i></i>Remember me</label>
-            <div class="clear"></div>
         </form>
         <!-- end-form -->
         <ol>
-            <li ng-repeat="r in studentList">
-                <h1 class="widget-title">{{r.name}}</h1>
+            <li ng-repeat="r in tripList">
+                <h1 class="widget-title">{{r.cName}}</h1>
                 <div class="">
                     <div>
-                        Class ID: <a href="{{r.id}}"> {{r.id}}</a>
+                        Trip's Name: <a href="{{r.tName}}"> {{r.tName}}</a>
                     </div>
                     <div>
-                        Course: <a href="{{r.course}}"> {{r.course}}</a>
+                        Email: <a href="{{r.email}}"> {{r.email}}</a>
                     </div>
                     <div>
-                        Major: <a href="{{r.major}}"> {{r.major}}</a>
+                        Pickup Location: <a href="{{r.origin}}"> {{r.origin}}</a>
                     </div>
                     <div>
-                        Minor: <a href="{{r.minor}}"> {{r.minor}}</a>
+                        Drop-off Location:  <a href="{{r.destination}}"> {{r.destination}}</a>
+                    </div>
+                    <div>
+                        Total Trip Cost:  <a href="{{r.cost}}"> {{r.cost}}</a>
                     </div>
                 </div>
             </li>
