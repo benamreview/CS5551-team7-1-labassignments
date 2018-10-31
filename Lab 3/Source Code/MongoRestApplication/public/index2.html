@@ -8,26 +8,32 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <style type="text/css">
         .site-bg {
-            position: fixed;
+           /* position: fixed;
             height: 100%;
             width: 100%;
             z-index: 0;
-            background-image: url(images/bg.jpg);
+            background-image: url("https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/Vjkyj2hBg/videoblocks-flat-geometrical-quad-forms-and-shapes-flow-animation-on-dark-blue-background_rzbbee22x_thumbnail-small09.jpg");
             background-size: cover;
             background-repeat: no-repeat;
-            background-attachment: fixed;
+            /*background-attachment: fixed;*/
         }
 
-        .site-bg-overlay {
+        /*.site-bg-overlay {
             position: fixed;
             width: 100%;
             height: 100%;
             top: 0;
             left: 0;
-            z-index: 1;
-            background: rgba(92, 180, 142, 0.4);
+           // z-index: 1;
+           // background: rgba(92, 180, 142, 0.4);
         }
-
+*/
+        body{
+            background-image: url("http://breathetravel.com/wp-content/uploads/2016/02/Breathe-Travel-Background.jpg");
+        }
+        .form_hint{
+            color:#DE4C34 ;
+        }
     </style>
 </head>
 <body>
@@ -40,35 +46,35 @@
     <div class="contact-form" style="width:100%;">
         <!-- start-form -->
         <form class="contact_form"  style="background: #FFF; width:100%;" ng-submit="insertData()" name="contact_form">
-            <h1>Contact and Payment Information</h1>
+            <h1 style="font-size: x-large;font-family: 'Arial';font-style: italic;color: darkorange;text-align: center">Contact and Payment Information</h1>
             <ul>
                 <li style="width:100%;">
-                    <input type="text" class="textbox1" name="tName" placeholder="Trip's Name" ng-model="formData.tName" required />
-                    <span class="form_hint">Please enter the Trip's name</span>
+                    <input type="text" class="textbox1" name="tName" placeholder="Trip's Name" style="color: #DE4C34" ng-model="formData.tName" required />
+                    <span class="form_hint" style="color: #DE4C34">Please enter the Trip's name</span>
                     <p><img src="images/contact.png" alt=""></p>
                 </li>
                 <li style="width:100%;">
-                    <input type="text" class="textbox1" name="cName" ng-model="formData.cName" placeholder="Customer's Name" required />
+                    <input type="text" class="textbox1" name="cName" ng-model="formData.cName"  style="color: #DE4C34" placeholder="Customer's Name" required />
                     <span class="form_hint">Please enter your name</span>
                     <p><img src="images/contact.png" alt=""></p>
                 </li>
                 <li style="width:100%;">
-                    <input type="text" class="textbox1" name="email" ng-model="formData.email" placeholder="example@gmail.com" required />
+                    <input type="text" class="textbox1" name="email" ng-model="formData.email" style="color: #DE4C34" placeholder="example@gmail.com" required />
                     <span class="form_hint">Please enter your email</span>
                     <p><img src="images/contact.png" alt=""></p>
                 </li>
                 <li style="width:100%;">
-                    <input type="text" class="textbox1" name="origin" ng-model="origin_address" placeholder="Pick-up Location" disabled />
+                    <input type="text" class="textbox1" name="origin" ng-model="origin_address" style="color: #DE4C34" placeholder="Pick-up Location" disabled />
                     <span class="form_hint">Please enter your origin address</span>
                     <p><img src="images/contact.png" alt=""></p>
                 </li>
                 <li style="width:100%;">
-                    <input type="text" class="textbox1" name="destination" ng-model="destination_address" placeholder="Drop-off Location" disabled />
+                    <input type="text" class="textbox1" name="destination" ng-model="destination_address"  style="color: #DE4C34" placeholder="Drop-off Location" disabled />
                     <span class="form_hint">Please enter your destination address</span>
                     <p><img src="images/contact.png" alt=""></p>
                 </li>
                 <li style="width:100%;">
-                    <input type="text" id = "cost" class="textbox1" name="cost" ng-model="tripChargeStr"  placeholder="Cost" disabled/>
+                    <input type="text" id = "cost" class="textbox1" name="cost" ng-model="tripChargeStr" style="color: #DE4C34"  placeholder="Cost" disabled/>
                     <span class="form_hint">Overall Cost from Previous Estimation</span>
                     <p><img src="images/contact.png" alt=""></p>
                 </li>
@@ -90,11 +96,11 @@
         <!--PayPal ends-->
         <!-- start-form -->
         <form class="contact_form"  style="background: #FFF; width:100%;" ng-submit="searchData()" name="contact_form2">
-            <h1>Search for Any Trip Information Here!</h1>
+            <h1 style="color: #88C470">Search for Any Trip Information Here!</h1>
             <ul>
                 <li style="width:100%;">
-                    <input type="text" class="textbox1" name="custName" ng-model="formData.custName" placeholder="Customer's Name" required />
-                    <span class="form_hint">Enter the Customer's name you want to search</span>
+                    <input type="text" class="textbox1" name="custName" ng-model="formData.custName" placeholder="Customer's Name" required style="color: #DE4C34"/>
+                    <span class="form_hint" style="color: #DE4C34">Enter the Customer's name you want to search</span>
                     <p><img src="images/contact.png" alt=""></p>
                 </li>
             </ul>

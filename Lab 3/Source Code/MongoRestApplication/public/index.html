@@ -9,6 +9,8 @@
     <title>CallaCab App</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="app.css">
 
     <style>
@@ -83,6 +85,46 @@
             font-style: italic;
             color: #BDB76B;
         }
+        body{
+            background-image: url("https://images.vexels.com/media/users/3/126387/preview2/e7d9701e05bf5fcb3d0b8dbb33af37b4-flat-travel-plane-frame-background.jpg");
+        }
+        #btn_getReview {
+            display: inline-block;
+            border-radius: 4px;
+            background-color: #f4511e;
+            border: none;
+            color: #FFFFFF;
+            text-align: center;
+            font-size: 13px;
+            padding: 15px;
+            width: 240px;
+            transition: all 0.5s;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        #btn_getReview span {
+            cursor: pointer;
+            display: inline-block;
+            position: relative;
+            transition: 0.5s;
+        }
+
+        #btn_getReview span:after {
+            content: '\00bb';
+            position: absolute;
+            opacity: 0;
+            transition: 0.5s;
+        }
+
+        #btn_getReview:hover span {
+            padding-right: 15px;
+        }
+
+        #btn_getReview:hover span:after {
+            opacity: 1;
+            right: 0;
+        }
     </style>
 
 </head>
@@ -91,19 +133,19 @@
 
 <div  ng-controller="View1Ctrl" style="top: 200px">
     <div class="menu" id="div_SearchContainer">
-        <h1 align="absolute" style="text-align: center; color: #BDB76B">Calculate your trip's distance now!</h1>
-        <input type="text" id="txt_placeName" placeholder="Enter the origin you want to start with..." style="margin-left: 100px"/>
+        <h1 align="absolute" style="text-align: center; color:darkred;font-style: italic;padding-top: 100px;">Calculate Your Trip's Distance now!</h1>
+        <input type="text" id="txt_placeName" placeholder="Enter the origin you want to start..." style="margin-left: 250px;"/>
         <input type="text" id="txt_searchFilter" placeholder="Enter the destination..."/>
-        <button id="btn_getReview">Get an Estimate for your Trip!</button></form>
+        <button id="btn_getReview"><span>Get an Estimate for your Trip!</span></button></form>
     </div>
     <div class = "menu" id="div_VenueList">
-        <h2 style="text-align: center; color: #BDB76B"> Results are calculated using Google Distance Matrix API and Payments are processed by Paypal </h2>
+        <h2 style="text-align: center; color: darkgoldenrod; font-style: oblique;font-size:15px"> Results are calculated using Google Distance Matrix API and Payments are processed by Paypal </h2>
         <ul>
-            <p id = "distanceField"style="font-size: x-large; color: #5e5e5e; text-align: center;"></p>
+            <b><p id = "distanceField" style="font-size:20px; color:darkblue;text-align: center;margin-top:-25px;font-style: oblique;font-family: '3DS Fonticon'"></p></b>
         </ul>
         <div style="text-align:center">
-            <button id="btn_gotoPay" style="display: none">Proceed to Payment</button></form>
-            <button id="btn_restart">Restart Session</button></form>
+            <button id="btn_gotoPay" style="display: none;width: 200px" class="w3-button w3-ripple w3-yellow">Proceed to Payment</button></form>
+            <button id="btn_restart" class="w3-button w3-ripple w3-yellow" style="width: 200px">Restart Session</button></form>
         </div>
 
     </div>
@@ -148,12 +190,12 @@
             }).done(function (response) {
                 console.log(response);
                 for (var i = 0; i<response.location.length; i++){
-                    console.log("\nThe Distance that it takes to travel is: " + response.location[i].distance);
+                    console.log("The Distance that it takes to travel is: " + response.location[i].distance);
                     console.log("\nThe Traveling Time is: " + response.location[i].duration);
                     var result = "\nThe Distance is: " + response.location[i].distance
                         + "\nThe Time is: " + response.location[i].duration
                         + "\nThe Cost is: $" + response.location[i].charge
-                        + "\n\n\n NOTE: Result cannot be changed unless session is restarted!"
+                        + "\n NOTE: Result cannot be changed unless session is restarted!"
                     $("#distanceField").html(result);
                     $("#distanceField").css("white-space","pre-line"); //break down to multiple lines
                     $("#txt_placeName").prop('disabled', true);
