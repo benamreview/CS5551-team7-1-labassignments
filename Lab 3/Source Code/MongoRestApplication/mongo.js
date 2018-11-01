@@ -63,7 +63,7 @@ app.post('/getDistance', function (req, res) {
         res.writeHead(200, {'Content-Type': 'application/json'});
         var loc = body.rows[0].elements; //first item of rows in JSON file
         for (var i = 0; i < loc.length; i++) {
-            var cost = parseInt(loc[i].duration.text.toString().substr(0,1))*5.55;
+            var cost = 1.15 + parseFloat((parseInt(loc[i].duration.value.toString())*3.55/60).toFixed(2));
             result.location.push({
                 'origin': body.origin_addresses,
                 'destination': body.destination_addresses,
