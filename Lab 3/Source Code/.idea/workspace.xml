@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="287b8e78-719f-4a4b-9c86-35667295e850" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MongoRestApplication/public/images/bg.jpg" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/MongoRestApplication/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/MongoRestApplication/public/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MongoRestApplication/public/index2.html" beforeDir="false" afterPath="$PROJECT_DIR$/MongoRestApplication/public/index2.html" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -67,12 +66,12 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="html" value="558" />
+          <entry key="html" value="613" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="HTML" value="558" />
+          <entry key="HTML" value="613" />
         </counts>
       </usages-collector>
     </session>
@@ -121,8 +120,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/MongoRestApplication/public/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="88" column="165" selection-start-line="88" selection-start-column="165" selection-end-line="88" selection-end-column="165" />
+            <state relative-caret-position="204">
+              <caret line="90" column="40" selection-start-line="90" selection-start-column="40" selection-end-line="90" selection-end-column="40" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#h1#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -299,12 +298,12 @@
       <option name="presentableId" value="Default" />
       <updated>1540850534975</updated>
       <workItem from="1540850536236" duration="8834000" />
-      <workItem from="1540946811722" duration="16100000" />
+      <workItem from="1540946811722" duration="16648000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="24934000" />
+    <option name="totallyTimeSpent" value="25482000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
@@ -439,8 +438,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/MongoRestApplication/public/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="88" column="165" selection-start-line="88" selection-start-column="165" selection-end-line="88" selection-end-column="165" />
+        <state relative-caret-position="204">
+          <caret line="90" column="40" selection-start-line="90" selection-start-column="40" selection-end-line="90" selection-end-column="40" />
           <folding>
             <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#h1#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
